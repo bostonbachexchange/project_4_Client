@@ -13,9 +13,11 @@ This platform allows choir members to connect to other members in their chorus. 
 * As a user, I want to be able to change my user password 
 * As a user, I want to be able to sign out of my user account
 * As a user, I want to be able to view my user information
-* As a user, I want to see all music/hymns
+* As a user, I want to see all songs/hymns
 * As a user, I want to be able to select ONE hymn/repertoire piece and view it by itself
+* As a user, I want to add/delete my song list
 * As a user, I want to be see message board post and to select ONE post and view it by itself
+
 
 
 ## STRETCH GOALS…
@@ -25,6 +27,7 @@ This platform allows choir members to connect to other members in their chorus. 
 
 #### As an admin user…
 * As an admin, I want to see all user profiles and view one by itself 
+* As an admin, I want to be able to add/delete repertoire instead of user
 
 ## Wireframes
 
@@ -42,13 +45,13 @@ Sign Up Page
 <img src="./assets/wireframes/SignUp.png" width="600px" alt="Sign Up Page" />
 
 
-HYMNS INDEX - logged in
+SongS INDEX - logged in
 <img src="./assets/wireframes/hymnsIndex.png" width="600px" alt="Header view - logged in" />
 
-Show Hymn
+Show Song
 <img src="./assets/wireframes/ShowHymn.png" width="600px" alt="Show Hymn Page" />
 
-MY Hymns Index
+MY Songs Index
 <img src="./assets/wireframes/MyHymnslist.png" width="600px" alt="Hymns Index" />
 
 Message Board Index
