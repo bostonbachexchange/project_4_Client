@@ -29,17 +29,17 @@ This platform allows choir members to connect to other members in their chorus. 
 
 ## Wireframes
 
-LAYOUT VIEW - overview/nav
-<img src="./assets/wireframes/layout.png" width="600px" alt="Layout view - logged in" />
+LAYOUT VIEW - overview
+<img src="./assets/wireframes/layout.png" width="600px" alt="Layout view" />
 
-LAYOUT-2 VIEW - overview/nav
-<img src="./assets/wireframes/layoutTWO.png" width="600px" alt="Layout view - logged in" />
+LAYOUT-2 VIEW - overview
+<img src="./assets/wireframes/layoutTWO.png" width="600px" alt="Layout view" />
 
 
-Log In/Sign Up Page
+Log In/Sign Up
 <img src="./assets/wireframes/Login.png" width="600px" alt="Log In/Sign Up Page" />
 
-Sign Up Page
+Sign Up
 <img src="./assets/wireframes/SignUp.png" width="600px" alt="Sign Up Page" />
 
 
@@ -50,16 +50,16 @@ Show Song
 <img src="./assets/wireframes/ShowHymn.png" width="600px" alt="Show Hymn Page" />
 
 MY Songs Index
-<img src="./assets/wireframes/MyHymnslist.png" width="600px" alt="Hymns Index" />
+<img src="./assets/wireframes/MyHymnslist.png" width="600px" alt="Songs Index" />
 
 Message Board Index
 <img src="./assets/wireframes/MessageBoardIndex.png" width="600px" alt="Message Board Index
 " />
 
-Message Board Show Page
+Message Board Show
 <img src="./assets/wireframes/MessageboardShow.png" width="600px" alt="Message Board Show Page" />
 
-Message Board Edit Page
+Message Board Edit 
 <img src="./assets/wireframes/MessageBoardEdit.png" width="600px" alt="Message Board Edit Page" />
 
 ERD
