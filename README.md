@@ -18,8 +18,6 @@ This platform allows choir members to connect to other members in their chorus. 
 * As a user, I want to add/delete my song list
 * As a user, I want to be see message board post and to select ONE post and view it by itself
 
-
-
 ## STRETCH GOALS…
 * As a user, I want to be able to search ALL music/repertoire through a search bar
 * As a user, I want to add images to my profile
@@ -45,7 +43,7 @@ Sign Up Page
 <img src="./assets/wireframes/SignUp.png" width="600px" alt="Sign Up Page" />
 
 
-SongS INDEX - logged in
+Songs INDEX - logged in
 <img src="./assets/wireframes/hymnsIndex.png" width="600px" alt="Header view - logged in" />
 
 Show Song
