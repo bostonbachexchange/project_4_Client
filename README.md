@@ -33,7 +33,7 @@ LAYOUT VIEW - overview
 <img src="./assets/wireframes/layout.png" width="600px" alt="Layout view" />
 
 LAYOUT-2 VIEW - overview
-<img src="./assets/wireframes/layoutTWO.png" width="600px" alt="Layout view" />
+<img src="./assets/wireframes/layoutTwo.png" width="600px" alt="Layout view" />
 
 
 Log In/Sign Up
