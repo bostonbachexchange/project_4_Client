@@ -14,6 +14,7 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import SongsIndex from './components/songs/SongsIndex'
 import ShowSong from './components/songs/ShowSong'
+import CreateSong from './components/songs/CreateSong'
 
 const App = () => {
 
@@ -73,17 +74,25 @@ const App = () => {
 					<Route
 						path='/songs'
 						element={
-							// <RequireAuth user={user}>
-							<SongsIndex msgAlert={msgAlert} user={user} />
-							// </RequireAuth>
+							<RequireAuth user={user}>
+								<SongsIndex msgAlert={msgAlert} user={user} />
+							</RequireAuth>
 						}
 					/>
 				<Route
 					path='/songs/:id'
 					element={
-						// <RequireAuth user={user}>
-						<ShowSong msgAlert={msgAlert} user={user} />
-						// </RequireAuth>
+						<RequireAuth user={user}>
+							<ShowSong msgAlert={msgAlert} user={user} />
+						</RequireAuth>
+					}
+				/>
+				<Route
+					path='/create-song'
+					element={
+						<RequireAuth user={user}>
+							<CreateSong msgAlert={msgAlert} user={user} />
+						</RequireAuth>
 					}
 				/>
 

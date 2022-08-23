@@ -7,6 +7,8 @@ const messages = {
 	changePasswordSuccess: 'Password changed successfully!',
 	changePasswordFailure:'Failed to change passwords. Check your old password and try again.',
 	getSongsFailure: 'Error fetching songs.',
+	createSongSuccess: 'Song created Successfully!',
+	createSongFailure: 'Something went wrong, please try again.'
 }
 
 module.exports = messages
