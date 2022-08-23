@@ -104,7 +104,7 @@ const ShowSong = (props) => {
             show={editModalShow}
             updateSong={updateSong}
             msgAlert={msgAlert}
-            // triggerRefresh={() => setUpdated(prev = !prev)}
+            triggerRefresh={() => setUpdated(!updated)}
             handleClose={() => setEditModalShow(false)}
             />
         </>

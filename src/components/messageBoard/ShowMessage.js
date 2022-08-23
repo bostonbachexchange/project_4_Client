@@ -5,26 +5,26 @@ import LoadingScreen from '../shared/LoadingScreen'
 import { getOneMessage, updateMessage, removeMessage } from '../../api/messageboard'
 import messages from '../shared/AutoDismissAlert/messages'
 import { Button, Card, Container } from 'react-bootstrap'
-// import EditSongModal from './EditSongModal'
+import EditMessageModal from './EditMessageModal'
 
 const ShowMessage = (props) => {
-    const [message, setSong] = useState(null)
-    // const [editModalShow, setEditModalShow] = useState(false)
+    const [message, setMessage] = useState(null)
+    const [editModalShow, setEditModalShow] = useState(false)
     const [updated, setUpdated] = useState(false)
 
     const { id } = useParams()
     const { msgAlert, user } = props
-    console.log('user in showSong', user)
-    console.log('song in showSong', message)
+    console.log('user in showMessage', user)
+    console.log('message in showMessage', message)
     const navigate = useNavigate()
 
     useEffect(() => {
         getOneMessage(id)
-            .then(res => setSong(res.data.message))
+            .then(res => setMessage(res.data.message))
             .catch(err => {
 
                 msgAlert({
-                    heading: 'Error getting song',
+                    heading: 'Error getting Message',
                     message: messages.getMessageFailure,
                     variant: 'danger'
                 })
@@ -45,10 +45,10 @@ const ShowMessage = (props) => {
                     variant: 'success'
                 })
             })
-            .then(() => {navigate('/songs')})
+            .then(() => {navigate('/messageboard')})
             .catch(err => {
                 msgAlert({
-                    heading: 'Error removing song',
+                    heading: 'Error removing message',
                     message: messages.removeMessageFailure,
                     variant: 'danger'
                 })
@@ -74,9 +74,9 @@ const ShowMessage = (props) => {
                         message.owner && user && message.owner._id === user._id 
                         ?
                         <>
-                            {/* <Button onClick={() => setEditModalShow(true)}      className="m-2" variant="warning">
+                            <Button onClick={() => setEditModalShow(true)}      className="m-2" variant="warning">
                             Edit Post
-                            </Button> */}
+                            </Button>
                             <Button onClick={() => removeTheMessage()} className="m-2" variant="danger">
                                 Delete Post
                             </Button>
@@ -89,15 +89,15 @@ const ShowMessage = (props) => {
                 </Card.Footer>
             </Card>
         </Container>
-        {/* <EditSongModal 
+        <EditMessageModal 
             user={user}
-            song={song}
+            message={message}
             show={editModalShow}
-            updateSong={updateSong}
+            updateMessage={updateMessage}
             msgAlert={msgAlert}
-            // triggerRefresh={() => setUpdated(prev = !prev)}
+            triggerRefresh={() => setUpdated(!updated)}
             handleClose={() => setEditModalShow(false)}
-            /> */}
+            />
         </>
     )
 }

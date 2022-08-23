@@ -32,7 +32,7 @@ const CreateMessage = (props) => {
         e.preventDefault()
 
         createMessage(user, message)
-            .then(res => { navigate(`/messageboard/${res.data.message}`)})
+            .then(res => { navigate(`/messageboard/${res.data.message._id}`)})
             // .then(res => console.log('this is the res from api call', res))
             .then(() => {
                 msgAlert({

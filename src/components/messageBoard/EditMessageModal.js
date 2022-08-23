@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { Modal } from 'react-bootstrap'
-import SongForm from "../shared/SongForm";
-import { updateSongSuccess, updateSongFailure } from '../shared/AutoDismissAlert/messages'
+import MessageBoardForm from "../shared/MessageBoardForm";
+import { updateMessageSuccess, updateMessageFailure } from '../shared/AutoDismissAlert/messages'
 
-const EditSongModal = (props) => {
-    const { user, show, handleClose, updateSong, msgAlert, triggerRefresh } = props
-    const [song, setSong] = useState(props.song)
+const EditMessageModal = (props) => {
+    const { user, show, handleClose, updateMessage, msgAlert, triggerRefresh } = props
+    const [message, setMessage] = useState(props.message)
 
-    console.log(song)
+    console.log(message)
     const handleChange = (e) => {
-        setSong(prevSong => {
+        setMessage(prevMessage => {
             const updatedValue = e.target.value 
             const updatedName = e.target.name 
-            const updatedSong = {
+            const updatedMessage = {
                 [updatedName]: updatedValue
             }
             return {
-                ...prevSong,
-                ...updatedSong
+                ...prevMessage,
+                ...updatedMessage
             }
         })
     }
@@ -25,13 +25,13 @@ const EditSongModal = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        updateSong(user, song)
+        updateMessage(user, message)
             .then(() => handleClose())
             // .then(res => console.log('this is the res from api call', res))
             .then(() => {
                 msgAlert({
                     heading: 'Oh Yeah!',
-                    message: updateSongSuccess,
+                    message: updateMessageSuccess,
                     variant: 'success'
                 })
             })
@@ -39,7 +39,7 @@ const EditSongModal = (props) => {
             .catch((error) => 
                 msgAlert({
                     heading: 'Oh No!',
-                    message: updateSongFailure,
+                    message: updateMessageFailure,
                     variant: 'danger'
                 }))
     }    
@@ -47,10 +47,10 @@ const EditSongModal = (props) => {
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton />
             <Modal.Body>
-                <SongForm song={song} handleChange={handleChange} handleSubmit={handleSubmit} heading="Update Song" />
+                <MessageBoardForm message={message} handleChange={handleChange} handleSubmit={handleSubmit} heading="Update Post" />
             </Modal.Body>
         </Modal>
     )
 }
 
- export default EditSongModal
+ export default EditMessageModal
