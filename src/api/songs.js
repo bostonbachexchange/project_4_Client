@@ -21,3 +21,28 @@ export const createSong = (user, newSong) => {
 		data: { song: newSong},
 	})
 }
+
+
+export const updateSong = (user, updatedSong) => {
+    // console.log('this is user', user)
+    console.log('this is updatedSong', updatedSong)
+	return axios({
+		url: `${apiUrl}/songs/${updatedSong._id}`,
+		method: 'PATCH',
+		headers: {
+			Authorization: `Token token=${user.token}`,
+		},
+		data: { song: updatedSong},
+	})
+}
+
+export const removeSong = (user, songId) => {
+    console.log('here is the songId in delete', songId)
+    return axios({
+        url: `${apiUrl}/songs/${songId}`,
+        method: 'DELETE',
+        headers: {
+            Authorization: `Token token=${user.token}`,
+        }
+    })
+}

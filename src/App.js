@@ -14,7 +14,11 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import SongsIndex from './components/songs/SongsIndex'
 import ShowSong from './components/songs/ShowSong'
+import ShowMessage from './components/messageBoard/ShowMessage'
 import CreateSong from './components/songs/CreateSong'
+import MessageBoardIndex from './components/messageBoard/MessageBoardIndex'
+import CreateMessage from './components/messageBoard/CreateMessage'
+import MessageBoardForm from './components/shared/MessageBoardForm'
 
 const App = () => {
 
@@ -77,6 +81,23 @@ const App = () => {
 							<RequireAuth user={user}>
 								<SongsIndex msgAlert={msgAlert} user={user} />
 							</RequireAuth>
+						}
+					/>
+					<Route
+						path='/messageboard'
+						element={
+							<RequireAuth user={user}>
+								<MessageBoardIndex msgAlert={msgAlert} user={user} />
+								<CreateMessage msgAlert={msgAlert} user={user} />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path='/messageboard/:id'
+						element={
+							<RequireAuth user={user}>
+								<ShowMessage msgAlert={msgAlert} user={user} />
+							 </RequireAuth>
 						}
 					/>
 				<Route

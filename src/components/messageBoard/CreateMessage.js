@@ -1,34 +1,29 @@
-import SongForm from '../shared/SongForm'
-import { createSong } from '../../api/songs'
+import MessageBoardForm from '../shared/MessageBoardForm'
+import { createMessage } from '../../api/messageboard'
 import { useNavigate } from 'react-router-dom'
-import { createSongSuccess, createSongFailure } from '../shared/AutoDismissAlert/messages'
+import { createMessageSuccess, createMessageFailure } from '../shared/AutoDismissAlert/messages'
 import { useState } from 'react'
 // import { createBootstrapComponent } from 'react-bootstrap/esm/ThemeProvider'
 
-const CreateSong = (props) => {
+const CreateMessage = (props) => {
     const { user, msgAlert } = props
     const navigate = useNavigate()
-    const [song, setSong] = useState({
+    const [message, setMessageBoard] = useState({
         title: '',
-        composer:  '',
-        lyricist: '',
-        type: '',
-        lyrics:'',
-        scorePDF:'',
-        recordings:'',
-        embedId: ''
+		content: '',
+        name: ''
     })
-    console.log('this is song in createSong', song)
+    console.log('this is message in createMessage', message)
     const handleChange = (e) => {
-        setSong(prevSong => {
+        setMessageBoard(prevMessage => {
             const updatedValue = e.target.value 
             const updatedName = e.target.name 
-            const updatedSong = {
+            const updatedMessage = {
                 [updatedName]: updatedValue
             }
             return {
-                ...prevSong,
-                ...updatedSong
+                ...prevMessage,
+                ...updatedMessage,
             }
         })
     }
@@ -36,25 +31,25 @@ const CreateSong = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        createSong(user, song)
-            .then(res => { navigate(`/songs/${res.data.song._id}`)})
+        createMessage(user, message)
+            .then(res => { navigate(`/messageboard/${res.data.message}`)})
             // .then(res => console.log('this is the res from api call', res))
             .then(() => {
                 msgAlert({
                     heading: 'Oh Yeah!',
-                    message: createSongSuccess,
+                    message: createMessageSuccess,
                     variant: 'success'
                 })
             })
             .catch((error) => 
                 msgAlert({
                     heading: 'Oh No!',
-                    message: createSongFailure,
+                    message: createMessageFailure,
                     variant: 'danger'
                 }))
     }
 
-    return <SongForm song={song} handleSubmit={handleSubmit} handleChange={handleChange} />
+    return <MessageBoardForm message={message} handleSubmit={handleSubmit} handleChange={handleChange} />
 }
 
-export default CreateSong
+export default CreateMessage

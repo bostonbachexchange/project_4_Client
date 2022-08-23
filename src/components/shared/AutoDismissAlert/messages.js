@@ -7,8 +7,16 @@ const messages = {
 	changePasswordSuccess: 'Password changed successfully!',
 	changePasswordFailure:'Failed to change passwords. Check your old password and try again.',
 	getSongsFailure: 'Error fetching songs.',
+	getMessagesFailure: 'Error fetching posts.',
 	createSongSuccess: 'Song created Successfully!',
-	createSongFailure: 'Something went wrong, please try again.'
+	createSongFailure: 'Something went wrong, please try again.',
+	updateSongSuccess: 'Song updated Successfully!',
+	updateSongFailure: 'Could not update song, something went wrong.',
+	removeSongSuccess: 'Song remove Successfully!',
+	removeSongFailure: 'Could not remove song, something went wrong.',
+	createMessageSuccess: 'Post created Successfully!',
+	createMessageFailure: 'Something went wrong, please try again.',
+
 }
 
 module.exports = messages

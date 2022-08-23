@@ -2,47 +2,46 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
 import LoadingScreen from '../shared/LoadingScreen'
-import { getOneSong, updateSong, removeSong } from '../../api/songs'
+import { getOneMessage, updateMessage, removeMessage } from '../../api/messageboard'
 import messages from '../shared/AutoDismissAlert/messages'
 import { Button, Card, Container } from 'react-bootstrap'
-import YoutubeEmbed from '../shared/YoutubeEmbed'
-import EditSongModal from './EditSongModal'
+// import EditSongModal from './EditSongModal'
 
-const ShowSong = (props) => {
-    const [song, setSong] = useState(null)
-    const [editModalShow, setEditModalShow] = useState(false)
+const ShowMessage = (props) => {
+    const [message, setSong] = useState(null)
+    // const [editModalShow, setEditModalShow] = useState(false)
     const [updated, setUpdated] = useState(false)
 
     const { id } = useParams()
     const { msgAlert, user } = props
     console.log('user in showSong', user)
-    console.log('song in showSong', song)
+    console.log('song in showSong', message)
     const navigate = useNavigate()
 
     useEffect(() => {
-        getOneSong(id)
-            .then(res => setSong(res.data.song))
+        getOneMessage(id)
+            .then(res => setSong(res.data.message))
             .catch(err => {
 
                 msgAlert({
                     heading: 'Error getting song',
-                    message: messages.getSongsFailure,
+                    message: messages.getMessageFailure,
                     variant: 'danger'
                 })
                 navigate('/')
             })
     }, [updated])
 
-    if (!song) {
+    if (!message) {
         return <LoadingScreen />
     }
 
-    const removeTheSong = () => {
-        removeSong(user, song._id)
+    const removeTheMessage = () => {
+        removeMessage(user, message._id)
             .then(() => {
                 msgAlert({
                     heading: 'Success',
-                    message: messages.removeSongSuccess,
+                    message: messages.removeMessageSuccess,
                     variant: 'success'
                 })
             })
@@ -50,7 +49,7 @@ const ShowSong = (props) => {
             .catch(err => {
                 msgAlert({
                     heading: 'Error removing song',
-                    message: messages.removeSongFailure,
+                    message: messages.removeMessageFailure,
                     variant: 'danger'
                 })
             })
@@ -62,32 +61,24 @@ const ShowSong = (props) => {
         <>
         <Container className='fluid'>
             <Card>
-                <Card.Header>{ song.title}</Card.Header>
+                <Card.Header>{ message.title}</Card.Header>
                 <Card.Body>
                     <Card.Text>
-                        <div><small>Composer: {song.composer}</small></div>
-                        <div><small>lyricist: {song.lyricist}</small></div>
-                        <div><small>lyrics: {song.lyrics}</small></div>
-                        <div><small>type: {song.type}</small></div>
-                        <div><a href={song.recordings}>recording</a></div>
-                        <div>
-                            <h1>Youtube Embed</h1>
-                            <YoutubeEmbed embedId={song.embedId} />
-                        </div>
+                        <div><small>content {message.content}</small></div>
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
                     {/* // this will show user the edit button if they 'own' the song, We want to make it so you can edit the song if you are an administrator */}
                     {
                         // song.owner && user && song.owner === user._id 
-                        song.owner && user && song.owner._id === user._id 
+                        message.owner && user && message.owner._id === user._id 
                         ?
                         <>
-                            <Button onClick={() => setEditModalShow(true)}      className="m-2" variant="warning">
-                            Edit Song
-                            </Button>
-                            <Button onClick={() => removeTheSong()} className="m-2" variant="danger">
-                                Delete The Song
+                            {/* <Button onClick={() => setEditModalShow(true)}      className="m-2" variant="warning">
+                            Edit Post
+                            </Button> */}
+                            <Button onClick={() => removeTheMessage()} className="m-2" variant="danger">
+                                Delete Post
                             </Button>
                             {/* ADD A BUTTON TO ADD SONG TO PRACTICE LIST */}
                         </>
@@ -98,7 +89,7 @@ const ShowSong = (props) => {
                 </Card.Footer>
             </Card>
         </Container>
-        <EditSongModal 
+        {/* <EditSongModal 
             user={user}
             song={song}
             show={editModalShow}
@@ -106,9 +97,9 @@ const ShowSong = (props) => {
             msgAlert={msgAlert}
             // triggerRefresh={() => setUpdated(prev = !prev)}
             handleClose={() => setEditModalShow(false)}
-            />
+            /> */}
         </>
     )
 }
 
-export default ShowSong
+export default ShowMessage

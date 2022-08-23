@@ -24,6 +24,11 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Item>
 		<Nav.Item className='m-2'>
+			<Link to='messageboard' style={linkStyle}>
+				Messageboard
+			</Link>
+		</Nav.Item>
+		<Nav.Item className='m-2'>
 			<Link to='create-song' style={linkStyle}>
 				Add a Song
 			</Link>
