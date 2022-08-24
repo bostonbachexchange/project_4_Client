@@ -36,6 +36,17 @@ export const updateSong = (user, updatedSong) => {
 	})
 }
 
+export const addSongToUser = (user, songId) => {
+	console.log('addSong to User in API was hit')
+	return axios({
+		url: `${apiUrl}/user/${songId}/${user._id}`,
+		method: 'PATCH',
+		headers: {
+			Authorization: `Token token=${user.token}`,
+		},
+	})
+}
+
 export const removeSong = (user, songId) => {
     console.log('here is the songId in delete', songId)
     return axios({

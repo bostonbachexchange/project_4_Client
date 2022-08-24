@@ -37,7 +37,7 @@ const MessageBoardIndex = (props) => {
         <>
         <Card key={messagepost._id} className='m-2'>
         {/* <Card key={message._id} className='m-2'> */}
-            <Card.Header>{messagepost.title} by {messagepost.name}</Card.Header>
+            <Card.Header>{messagepost.title} by {messagepost.owner.email}</Card.Header>
             <Card.Body>
                 <Card.Text>
                     <Link to={`/messageboard/${messagepost._id}`}>View {messagepost.content}</Link>

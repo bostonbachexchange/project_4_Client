@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
 import LoadingScreen from '../shared/LoadingScreen'
-import { getOneSong, updateSong, removeSong } from '../../api/songs'
+import { getOneSong, updateSong, removeSong, addSongToUser } from '../../api/songs'
 import messages from '../shared/AutoDismissAlert/messages'
 import { Button, Card, Container } from 'react-bootstrap'
 import YoutubeEmbed from '../shared/YoutubeEmbed'
@@ -55,6 +55,26 @@ const ShowSong = (props) => {
                 })
             })
     }
+    const addTheSong = () => {
+        addSongToUser(user, song._id)
+            .then(() => {
+                msgAlert({
+                    heading: 'Success',
+                    message: 'added song to user prof',
+                    variant: 'success'
+                })
+            })
+            // .then(() => {navigate('/songs')})
+            .catch(err => {
+                msgAlert({
+                    heading: 'Error adding song',
+                    message: 'failed to add song to user',
+                    variant: 'danger'
+                })
+            })
+    }
+
+
     // if (song.embedId) {
     //     let embededvideo = song.embedId
     // }
@@ -89,12 +109,16 @@ const ShowSong = (props) => {
                             <Button onClick={() => removeTheSong()} className="m-2" variant="danger">
                                 Delete The Song
                             </Button>
+
                             {/* ADD A BUTTON TO ADD SONG TO PRACTICE LIST */}
                         </>
                     :
                     // in theory......
                     <p>Only an Admin can edit this song</p>
                     }
+                    <Button onClick={() => addTheSong()} className="m-2" variant="info">
+                    Add to my repertoire list
+                    </Button>
                 </Card.Footer>
             </Card>
         </Container>

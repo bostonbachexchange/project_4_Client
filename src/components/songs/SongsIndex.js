@@ -29,6 +29,7 @@ const SongsIndex = (props) => {
         return <p>No songs yet. Better add some.</p>
     }
 
+    
     const songCards = songs.map(song => 
         <Card key={song.id} className='m-2'>
             <Card.Header>{song.title}</Card.Header>

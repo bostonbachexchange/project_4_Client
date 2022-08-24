@@ -29,6 +29,7 @@ const NewCommentModal = (props) => {
         e.preventDefault()
 
         createComment(user, message._id, comment)
+            .then(() => comment.owner = user._id)
             .then(() => handleClose())
             // .then(res => console.log('this is the res from api call', res))
             .then(() => {

@@ -16,16 +16,15 @@ const ShowMessage = (props) => {
     const [updated, setUpdated] = useState(false)
 
     const { id } = useParams()
-    const { msgAlert, user } = props
+    const { msgAlert, user, comment, triggerRefresh } = props
     console.log('user in showMessage', user)
-    console.log('message in showMessage', message)
+    // console.log('message in showMessage', message)
     const navigate = useNavigate()
 
     useEffect(() => {
         getOneMessage(id)
             .then(res => setMessage(res.data.message))
             .catch(err => {
-
                 msgAlert({
                     heading: 'Error getting Message',
                     message: messages.getMessageFailure,
@@ -48,7 +47,7 @@ const ShowMessage = (props) => {
                     variant: 'success'
                 })
             })
-            .then(() => {navigate('/messageboard')})
+            .then(() => {navigate(`/messageboard`)})
             .catch(err => {
                 msgAlert({
                     heading: 'Error removing message',
@@ -57,39 +56,56 @@ const ShowMessage = (props) => {
                 })
             })
     }
-    const removeTheComment = () => {
-        removeMessage(user, message._id)
+
+    // create another component???
+    const removeTheComment = (cmt) => {
+        console.log("!!!!", cmt)
+        removeComment(user, message._id, cmt._id)
             .then(() => {
                 msgAlert({
                     heading: 'Success',
-                    message: messages.removeMessageSuccess,
+                    message: messages.removeCommentSuccess,
                     variant: 'success'
                 })
             })
-            .then(() => {navigate(`/messageboard/${message._id}`)})
+            // ????
+            // .then(() => triggerRefresh())
             .catch(err => {
                 msgAlert({
                     heading: 'Error removing message',
-                    message: messages.removeMessageFailure,
+                    message: messages.removeCommentFailure,
                     variant: 'danger'
                 })
             })
     }
-    // if (song.embedId) {
-    //     let embededvideo = song.embedId
-    // }
+        // could be turned into componet
+        // needs styling
+        // pass comment id?
     const commentList = message.comments.map(cmt => 
         <>
-            <p>{cmt.content} <span>
-                <Button onClick={() => removeTheComment()} className="m-2 " variant="danger" > 🗑 </Button>                     
-                </span></p>   
+        <Card>
+        {/* {cmt.owner.email} */}
+            <p>{cmt.content} from {cmt.owner.email}
+            {message.owner && user && message.owner._id === user._id 
+                ?
+                <>
+            <span>
+                <Button onClick={() => removeTheComment()} className="m-2 " variant="info" > Edit📝 </Button>                     
+                <Button onClick={() => removeTheComment(cmt)} className="m-2 " variant="info" > Delete🗑 </Button>                     
+                </span>
+                </>
+                :
+                null
+            }  
+            </p> 
+        </Card>
         </>
         ) 
     return (
         <>
         <Container className='fluid'>
             <Card>
-                <Card.Header>{ message.title}</Card.Header>
+                <Card.Header>{ message.title} from {message.owner.email}</Card.Header>
                 <Card.Body>
                     <Card.Text>
                         <div><small>content {message.content}</small></div>
