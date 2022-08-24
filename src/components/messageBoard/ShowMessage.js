@@ -3,13 +3,16 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 import LoadingScreen from '../shared/LoadingScreen'
 import { getOneMessage, updateMessage, removeMessage } from '../../api/messageboard'
+import { removeComment } from '../../api/comments'
 import messages from '../shared/AutoDismissAlert/messages'
 import { Button, Card, Container } from 'react-bootstrap'
 import EditMessageModal from './EditMessageModal'
+import NewCommentModal from '../comments/NewCommentModal'
 
 const ShowMessage = (props) => {
     const [message, setMessage] = useState(null)
     const [editModalShow, setEditModalShow] = useState(false)
+    const [commentModalShow, setCommentModalShow] = useState(false)
     const [updated, setUpdated] = useState(false)
 
     const { id } = useParams()
@@ -54,9 +57,34 @@ const ShowMessage = (props) => {
                 })
             })
     }
+    const removeTheComment = () => {
+        removeMessage(user, message._id)
+            .then(() => {
+                msgAlert({
+                    heading: 'Success',
+                    message: messages.removeMessageSuccess,
+                    variant: 'success'
+                })
+            })
+            .then(() => {navigate(`/messageboard/${message._id}`)})
+            .catch(err => {
+                msgAlert({
+                    heading: 'Error removing message',
+                    message: messages.removeMessageFailure,
+                    variant: 'danger'
+                })
+            })
+    }
     // if (song.embedId) {
     //     let embededvideo = song.embedId
     // }
+    const commentList = message.comments.map(cmt => 
+        <>
+            <p>{cmt.content} <span>
+                <Button onClick={() => removeTheComment()} className="m-2 " variant="danger" > 🗑 </Button>                     
+                </span></p>   
+        </>
+        ) 
     return (
         <>
         <Container className='fluid'>
@@ -67,12 +95,16 @@ const ShowMessage = (props) => {
                         <div><small>content {message.content}</small></div>
                     </Card.Text>
                 </Card.Body>
+                    <Card.Footer>
+                        <div><small>{commentList}</small></div>
+                    </Card.Footer>
                 <Card.Footer>
+                    <Button onClick={()=> setCommentModalShow(true)} className='m-2' variant='info'>Post a comment</Button>
                     {/* // this will show user the edit button if they 'own' the song, We want to make it so you can edit the song if you are an administrator */}
                     {
-                        // song.owner && user && song.owner === user._id 
-                        message.owner && user && message.owner._id === user._id 
-                        ?
+                    // song.owner && user && song.owner === user._id 
+                    message.owner && user && message.owner._id === user._id 
+                    ?
                         <>
                             <Button onClick={() => setEditModalShow(true)}      className="m-2" variant="warning">
                             Edit Post
@@ -84,7 +116,7 @@ const ShowMessage = (props) => {
                         </>
                     :
                     // in theory......
-                    <p>Only an Admin can edit this song</p>
+                    <p>you cannot edit this message</p>
                     }
                 </Card.Footer>
             </Card>
@@ -95,9 +127,17 @@ const ShowMessage = (props) => {
             show={editModalShow}
             updateMessage={updateMessage}
             msgAlert={msgAlert}
-            triggerRefresh={() => setUpdated(!updated)}
+            triggerRefresh={() => setUpdated(updated => !updated)}
             handleClose={() => setEditModalShow(false)}
-            />
+        />
+        <NewCommentModal 
+            message={message}
+            show={commentModalShow}
+            user={user}
+            msgAlert={msgAlert}
+            triggerRefresh={() => setUpdated(updated => !updated)}
+            handleClose={() => setCommentModalShow(false)}
+        />
         </>
     )
 }

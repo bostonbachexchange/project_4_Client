@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import LoadingScreen from '../shared/LoadingScreen'
 import { getMessageBoard } from '../../api/messageboard'
 import messages from '../shared/AutoDismissAlert/messages'
+import CommentForm from '../shared/CommentForm'
+
 const MessageBoardIndex = (props) => {
     const [messageboard, setMessageBoard] = useState(null)
     const [error, setError] = useState(false)
@@ -16,7 +18,7 @@ const MessageBoardIndex = (props) => {
                 // console.log(err)
                 msgAlert({
                     heading: 'Error Getting Messages',
-                    message: messages.getMessagesFailure,
+                    message: messages.getMessageFailure,
                     variant: 'danger',
                 })
                 setError(true)
@@ -31,7 +33,8 @@ const MessageBoardIndex = (props) => {
         return <p>No Posts yet. Better add some.</p>
     }
 
-    const messageboardCards = messageboard.map(messagepost => 
+    const messageboardCards = messageboard.map(messagepost =>
+        <>
         <Card key={messagepost._id} className='m-2'>
         {/* <Card key={message._id} className='m-2'> */}
             <Card.Header>{messagepost.title} by {messagepost.name}</Card.Header>
@@ -41,6 +44,8 @@ const MessageBoardIndex = (props) => {
                 </Card.Text>
             </Card.Body>
         </Card>
+        {/* <CommentForm /> */}
+        </>
         )
     return (
         <>{messageboardCards}</>

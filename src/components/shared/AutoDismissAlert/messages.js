@@ -14,6 +14,8 @@ const messages = {
 	updateSongFailure: 'Could not update song, something went wrong.',
 	removeSongSuccess: 'Song remove Successfully!',
 	removeSongFailure: 'Could not remove song, something went wrong.',
+	removeMessagegSuccess: 'Message remove Successfully!',
+	removeMessageFailure: 'Could not remove message, something went wrong.',
 	createMessageSuccess: 'Post created Successfully!',
 	createMessageFailure: 'Something went wrong, please try again.',
 
