@@ -18,6 +18,12 @@ const authenticatedOptions = (
 				Sign Out
 			</Link>
 		</Nav.Item>
+		{/* Build API IN BACK END? */}
+		<Nav.Item className='m-2'>
+			<Link to='mysongs' style={linkStyle}>
+				My Song List
+			</Link>
+		</Nav.Item>
 		<Nav.Item className='m-2'>
 			<Link to='songs' style={linkStyle}>
 				Songs
