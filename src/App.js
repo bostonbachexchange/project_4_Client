@@ -19,6 +19,7 @@ import CreateSong from './components/songs/CreateSong'
 import MessageBoardIndex from './components/messageBoard/MessageBoardIndex'
 import CreateMessage from './components/messageBoard/CreateMessage'
 import MessageBoardForm from './components/shared/MessageBoardForm'
+import MySongList from './components/user/MySongList'
 
 const App = () => {
 
@@ -80,6 +81,14 @@ const App = () => {
 						element={
 							<RequireAuth user={user}>
 								<SongsIndex msgAlert={msgAlert} user={user} />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path='/mysongs'
+						element={
+							<RequireAuth user={user}>
+								<MySongList msgAlert={msgAlert} user={user} />
 							</RequireAuth>
 						}
 					/>
