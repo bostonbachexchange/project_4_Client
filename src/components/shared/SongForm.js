@@ -16,7 +16,7 @@ const SongForm = (props) => {
     const { song, handleChange, handleSubmit } = props
 
     return <>
-            <Form className='m-3' onSubmit={handleSubmit}>
+            <Form className='m-5' onSubmit={handleSubmit} name="uploaded_file">
                 <h3>Add a new song</h3>
                 <Form.Group className="mb-3" >
                     <Form.Label column sm="2" htmlFor="title">Song Title</Form.Label>
@@ -49,17 +49,22 @@ const SongForm = (props) => {
 
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="scorePDF">Score PDF</Form.Label>
-                    <Form.Control type="file" placeholder="Upload a file for score" value={song.scorePDF} name="scorePDF" id="scorePDF" onChange={ handleChange }/>
+                    <Form.Control className="w-50" type="file" placeholder="Upload a file for score" value={song.scorePDF} name="scorePDF" id="scorePDF" onChange={ handleChange }/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
+                    <Form.Label htmlFor="recordings">Description</Form.Label>
+                    <Form.Control className="w-50" placeholder="description" value={song.recordings} type='text' name="recordings" id="recordings" onChange={ handleChange }/>
+                </Form.Group>
+
+                {/* <Form.Group className="mb-3">
                     <Form.Label htmlFor="recordings">Recording</Form.Label>
                     <Form.Control placeholder="link to recording" value={song.recordings} name="recordings" id="recordings" onChange={ handleChange }/>
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="embedId">Embed Id from Youtube video</Form.Label>
-                    <Form.Control placeholder="Embed an Id of video from youtube" value={song.embedId} name="embedId" id="embedId" onChange={ handleChange }/>
+                    <Form.Control className="w-50" placeholder="Embed an Id of video from youtube" value={song.embedId} name="embedId" id="embedId" onChange={ handleChange }/>
                 </Form.Group>
                 
                 <Button variant="primary" type="submit">

@@ -3,11 +3,11 @@ import { createSong } from '../../api/songs'
 import { useNavigate } from 'react-router-dom'
 import { createSongSuccess, createSongFailure } from '../shared/AutoDismissAlert/messages'
 import { useState } from 'react'
-// import { createBootstrapComponent } from 'react-bootstrap/esm/ThemeProvider'
 
 const CreateSong = (props) => {
     const { user, msgAlert } = props
     const navigate = useNavigate()
+    const [ selected, setSelected ] = useState(null)
     const [song, setSong] = useState({
         title: '',
         composer:  '',
@@ -30,12 +30,16 @@ const CreateSong = (props) => {
                 ...prevSong,
                 ...updatedSong
             }
+
         })
+        setSelected(e.target.files[0])
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        // added this janke
+        const data = new FormData()
+        data.append('upload', selected)
         createSong(user, song)
             .then(res => { navigate(`/songs/${res.data.song._id}`)})
             // .then(res => console.log('this is the res from api call', res))

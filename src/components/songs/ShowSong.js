@@ -88,6 +88,7 @@ const ShowSong = (props) => {
                         <div><small>Composer: {song.composer}</small></div>
                         <div><small>lyricist: {song.lyricist}</small></div>
                         <div><small>lyrics: {song.lyrics}</small></div>
+                        <div><small>score: <img scr={song.scorePDF}></img></small></div>
                         <div><small>type: {song.type}</small></div>
                         <div><a href={song.recordings}>recording</a></div>
                         <div>

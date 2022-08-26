@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import LoadingScreen from '../shared/LoadingScreen'
+import YoutubeEmbed from "../shared/YoutubeEmbed";
 // import { getMYSongs } from '../../api/USER'
 import messages from '../shared/AutoDismissAlert/messages'
 
@@ -22,11 +23,23 @@ const MySongList = (props) => {
            repList.map(rep => 
         
             <>
-              <Card key={rep} className='m-2'>
-                  <Card.Header>Title</Card.Header>
+            {console.log(rep)}
+              <Card key={rep._id} className='m-2'>
+                  <Card.Header><h1><Link to={`/songs/${rep._id}`}>{rep.title}</Link></h1></Card.Header>
                   <Card.Body>
                       <Card.Text>
-                          <Link to={`/songs/${rep}`}>View {rep}</Link>
+                          
+                          <div><small>Composer: {rep.composer}</small></div>
+                        <div><small>lyricist: {rep.lyricist}</small></div>
+                        <div><small>lyrics: {rep.lyrics}</small></div>
+                        <div><small>type: {rep.type}</small></div>
+                        <div><a href={rep.recordings}>recording</a></div>
+                        <div>
+                        {rep.embedId ?(
+                            <><h1>Youtube Embed</h1>
+                            <YoutubeEmbed embedId={rep.embedId} /></> 
+                        ) : (<p>embedId does not exist</p> )}
+                        </div>
                       </Card.Text>
                   </Card.Body>
               </Card>

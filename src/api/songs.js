@@ -13,6 +13,7 @@ export const createSong = (user, newSong) => {
     console.log('this is user', user)
     console.log('this is newSong', newSong)
 	return axios({
+		// url: apiUrl + '/uploads',
 		url: apiUrl + '/create-song',
 		method: 'POST',
 		headers: {

@@ -48,7 +48,10 @@ const MessageBoardIndex = (props) => {
         </>
         )
     return (
-        <>{messageboardCards}</>
+        <>
+            <h1 className='m-2'>Community Message Board</h1>
+            <div>{messageboardCards}</div>
+        </>
     )
 }
 
