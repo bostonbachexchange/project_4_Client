@@ -14,38 +14,34 @@ const MySongList = (props) => {
 
 
  return (
-    
     <>
-        <h1>My Song List</h1>
+        <h1 className="m-2 playFont">My Song List</h1>
+
         {!user ?(
-            <p>no user true</p> 
-         ) : ( 
+            <p><LoadingScreen/></p> 
+        ) : ( 
            repList.map(rep => 
         
             <>
-            <Container>
-              <Card key={rep._id} className='m-2'>
-                  <Card.Header><h1><Link to={`/songs/${rep._id}`}>{rep.title}</Link></h1></Card.Header>
-                  <Card.Body>
-                      <Card.Text>
-                          
-                          <div><small>Composer: {rep.composer}</small></div>
-                        <div><small>lyricist: {rep.lyricist}</small></div>
-                        <div><small>lyrics: {rep.lyrics}</small></div>
-                        <div><small>type: {rep.type}</small></div>
-                        <div><a href={rep.recordings}>recording</a></div>
-                        <div>
-                        {rep.embedId ?(
-                            <><h1>Youtube Embed</h1>
-                            <YoutubeEmbed embedId={rep.embedId} /></> 
-                        ) : (<p>embedId does not exist</p> )}
-                        </div>
-                      </Card.Text>
-                  </Card.Body>
-              </Card>
-              </Container>
+                <Container>
+                    <Card key={rep._id} className='m-2 playFont'>
+                        <Card.Header><h1><Link to={`/songs/${rep._id}`}>{rep.title}</Link></h1></Card.Header>
+                        <Card.Body>
+                            <Card.Text>
+                                {rep.composer ?(<div><strong>composer:</strong> {rep.composer}</div>) : (null)}
+                                {rep.lyricist ?(<div><strong>lyricist:</strong> {rep.lyricist}</div>) : (null)}
+                                {rep.scorePDF ?(<div><strong>scorePDF:</strong> {rep.scorePDF}</div>) : (null)}
+                                {rep.type ?(<div><strong>type:</strong> {rep.type}</div>) : (null)}
+                                {rep.recordings ?(<div><strong>recordings:</strong> {rep.recordings}</div>) : (null)}
+                                {rep.embedId ?(<div className='m-2'>
+                                    <YoutubeEmbed embedId={rep.embedId} />
+                                </div>) : (null)}
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Container>
            </>
-              )
+            )
         )}
     </>)
 }

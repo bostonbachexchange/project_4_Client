@@ -74,19 +74,23 @@ const ShowSong = (props) => {
             })
     }
 
-
-    // if (song.embedId) {
-    //     let embededvideo = song.embedId
-    // }
     return (
         <>
-        <Container className='fluid'>
+        <Container className='m-2 fluid playFont'>
             <Card>
-                <Card.Header>{ song.title}</Card.Header>
+                <Card.Header><h2>{ song.title}</h2></Card.Header>
                 <Card.Body>
                     <Card.Text>
-                        <div><small>Composer: {song.composer}</small></div>
-                        <div><small>lyricist: {song.lyricist}</small></div>
+                        {song.composer ?(<div><strong>composer:</strong> {song.composer}</div>) : (null)}
+                        {song.lyricist ?(<div><strong>lyricist:</strong> {song.lyricist}</div>) : (null)}
+                        {song.scorePDF ?(<div><strong>scorePDF:</strong> {song.scorePDF}</div>) : (null)}
+                        {song.type ?(<div><strong>type:</strong> {song.type}</div>) : (null)}
+                        {song.recordings ?(<div><strong>recordings:</strong> {song.recordings}</div>) : (null)}
+                        {song.embedId ?(<div className='m-2'>
+                            <YoutubeEmbed embedId={song.embedId} />
+                        </div>) : (null)}
+
+                        {/* <div><small>lyricist: {song.lyricist}</small></div>
                         <div><small>lyrics: {song.lyrics}</small></div>
                         <div><small>score: <img scr={song.scorePDF}></img></small></div>
                         <div><small>type: {song.type}</small></div>
@@ -94,7 +98,7 @@ const ShowSong = (props) => {
                         <div>
                             <h1>Youtube Embed</h1>
                             <YoutubeEmbed embedId={song.embedId} />
-                        </div>
+                        </div> */}
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>

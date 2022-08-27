@@ -6,6 +6,7 @@ import { getMessageBoard } from '../../api/messageboard'
 import messages from '../shared/AutoDismissAlert/messages'
 import CommentForm from '../shared/CommentForm'
 
+
 const MessageBoardIndex = (props) => {
     const [messageboard, setMessageBoard] = useState(null)
     const [error, setError] = useState(false)
@@ -30,27 +31,30 @@ const MessageBoardIndex = (props) => {
     if (!messageboard) {
         return <LoadingScreen />
     } else if (messageboard.length === 0) {
-        return <p>No Posts yet. Better add some.</p>
+        return <p>No Posts yet. Say Hello!.</p>
     }
 
     const messageboardCards = messageboard.map(messagepost =>
         <>
-        <Card key={messagepost._id} className='m-2'>
+        <hr></hr>
+        <Card key={messagepost._id} className='m-2 playFont'>
         {/* <Card key={message._id} className='m-2'> */}
-            <Card.Header>{messagepost.title} by {messagepost.owner.email}</Card.Header>
+            <Card.Header><strong>{messagepost.title}</strong> by <em>{messagepost.owner.email}</em></Card.Header>
             <Card.Body>
                 <Card.Text>
-                    <Link to={`/messageboard/${messagepost._id}`}>View {messagepost.content}</Link>
+                    <Link to={`/messageboard/${messagepost._id}`}><span> {messagepost.content}</span></Link>
                 </Card.Text>
             </Card.Body>
         </Card>
+        <hr></hr>
         {/* <CommentForm /> */}
         </>
         )
     return (
         <>
-            <h1 className='m-2'>Community Message Board</h1>
-            <div>{messageboardCards}</div>
+            <hr></hr>
+            <h1 className='m-2 playFont'>Community Message Board</h1>
+            <div className='m-2'>{messageboardCards}</div>
         </>
     )
 }

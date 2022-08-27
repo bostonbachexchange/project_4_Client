@@ -14,91 +14,66 @@ const homeStyle = {
 }
 const authenticatedOptions = (
 	<>
-		<Nav.Item className='m-2'>
+		<Nav.Item className='m-2 playFont'>
 			<Link to='messageboard' style={linkStyle}>
-				Messageboard
+				<span className='HoverClass1'>Messageboard</span>
 			</Link>
 		</Nav.Item>
 
-		<NavDropdown   title={
-        <span className="navTitle">Songs</span>
-    } menuVariant="dark" style={linkStyle}>
-		<Nav.Item className='m-2 myLink'>
-			<Link to='mysongs' style={linkStyle}>
-				My Song List
-			</Link>
-		</Nav.Item>
-		<Nav.Item className='m-2'>
-			<Link to='songs' style={linkStyle}>
-				Song Index
-			</Link>
-		</Nav.Item>
-		<Nav.Item className='m-2'>
-			<Link to='create-song' style={linkStyle}>
-				Add a Song
-			</Link>
-		</Nav.Item>
+		<NavDropdown   
+		title={
+        	<span className="navTitle playFont HoverClass1">Songs</span>
+			} 	
+			menuVariant="dark" 
+			style={linkStyle}
+		>
+			<Nav.Item className='m-2 playFont'>
+				<Link to='mysongs' style={linkStyle}>
+				<span className='HoverClass1'>My Song List</span>
+				</Link>
+			</Nav.Item>
+			<Nav.Item className='m-2 playFont'>
+				<Link to='songs' style={linkStyle}>
+				<span className='HoverClass1'>Song Index</span>
+				</Link>
+			</Nav.Item>
+			<Nav.Item className='m-2 playFont'>
+				<Link to='create-song' style={linkStyle}>
+					<span className='HoverClass1'>Add a Song</span>
+				</Link>
+			</Nav.Item>
 		</NavDropdown>
 		
-		<NavDropdown   title={
-        <span className="navTitle">My Account</span>
-    } menuVariant="dark" style={linkStyle}>
-			<Nav.Item eventKey='1' className='m-2'>
+		<NavDropdown   
+			title={<span className="navTitle playFont HoverClass1">My Account</span>} 
+			menuVariant="dark" 
+			style={linkStyle}
+			>
+			<Nav.Item eventKey='1' className='m-2 playFont'>
 				<Link to='change-password' style={linkStyle}>
-					Change Password
+				<span className='HoverClass1'>Change Password</span>
 				</Link>
 			</Nav.Item >
-			<Nav.Item eventKey='2' className='m-2'>
+			<Nav.Item eventKey='2' className='m-2 playFont'>
 				<Link to='sign-out' style={linkStyle}>
-					Sign Out
+				<span className='HoverClass1'>Sign Out</span>
 				</Link>
 			</Nav.Item>
 		</NavDropdown>
 	</>
 )
-// const authenticatedUserOptions = (
-// 	<>
-// 		<Nav.Item className='m-2'>
-// 			<Link to='change-password' style={linkStyle}>
-// 				Change Password
-// 			</Link>
-// 		</Nav.Item>
-// 		<Nav.Item className='m-2'>
-// 			<Link to='sign-out' style={linkStyle}>
-// 				Sign Out
-// 			</Link>
-// 		</Nav.Item>
-// 		{/* Build API IN BACK END? */}
-// 		<Nav.Item className='m-2'>
-// 			<Link to='mysongs' style={linkStyle}>
-// 				My Song List
-// 			</Link>
-// 		</Nav.Item>
-// 		<Nav.Item className='m-2'>
-// 			<Link to='songs' style={linkStyle}>
-// 				Songs
-// 			</Link>
-// 		</Nav.Item>
-// 		<Nav.Item className='m-2'>
-// 			<Link to='messageboard' style={linkStyle}>
-// 				Messageboard
-// 			</Link>
-// 		</Nav.Item>
-// 		<Nav.Item className='m-2'>
-// 			<Link to='create-song' style={linkStyle}>
-// 				Add a Song
-// 			</Link>
-// 		</Nav.Item>
-// 	</>
-// )
 
 const unauthenticatedOptions = (
 	<>
         <Nav.Item className='m-2'>
-		    <Link to='sign-up' style={linkStyle}>Sign Up</Link>
+		    <Link to='sign-up' style={linkStyle}>
+				<span className='HoverClass1'>Sign Up</span>
+			</Link>
         </Nav.Item>
         <Nav.Item className='m-2'>
-		    <Link to='sign-in' style={linkStyle}>Sign In</Link>
+		    <Link to='sign-in' style={linkStyle}>
+				<span className='HoverClass1'>Sign In</span>
+			</Link>
         </Nav.Item>
 	</>
 )
@@ -115,9 +90,9 @@ const unauthenticatedOptions = (
 
 const Header = ({ user }) => (
 	<Navbar bg='dark' variant='dark' expand='md'>
-		<Navbar.Brand className='m-2'>
+		<Navbar.Brand className='m-2 playFont'>
             <Link to='/' style={linkStyle}>
-                Harmony Haven
+				<span className='HoverClass1'>Harmony Haven</span>
             </Link>
         </Navbar.Brand>
 
@@ -127,7 +102,7 @@ const Header = ({ user }) => (
 			<Nav className='m-2'>
 			{/* <Nav className='ml-auto' className='m-2'> */}
 				{user && (
-					<span className='navbar-text mr-2' style={linkStyle}>Welcome, {user.email}</span>
+					<span className='navbar-text mr-2 playFont' style={linkStyle}>Welcome, {user.email}</span>
 				)}
 				{/* {alwaysOptions} */}
 				{user ? authenticatedOptions : unauthenticatedOptions}

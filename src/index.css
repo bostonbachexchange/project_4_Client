@@ -45,3 +45,5 @@ code {
 .navTitle {
   color: teal;
 }
+
+.HoverClass1:hover {color: white !important;}

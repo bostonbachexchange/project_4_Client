@@ -53,8 +53,8 @@ const SongForm = (props) => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label htmlFor="recordings">Description</Form.Label>
-                    <Form.Control className="w-50" placeholder="description" value={song.recordings} type='text' name="recordings" id="recordings" onChange={ handleChange }/>
+                    <Form.Label htmlFor="recordings">recordings</Form.Label>
+                    <Form.Control className="w-50" placeholder="recordings" value={song.recordings} type='text' name="recordings" id="recordings" onChange={ handleChange }/>
                 </Form.Group>
 
                 {/* <Form.Group className="mb-3">
