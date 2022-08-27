@@ -1,7 +1,7 @@
-# CHORDIALLY YOURS
+# Harmony Haven
 
 # Pitch
-CHORDIALLY YOURS is an app that will take your choir to the next level. 
+Harmony Haven is an app that will take your choir to the next level. 
 
 # Pitch
 This platform allows choir members to connect to other members in their chorus. Users find choral works to practice and add to their repertoire list. Create an opportunity to connect and share ideas and build community.

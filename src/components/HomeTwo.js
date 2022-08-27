@@ -35,7 +35,6 @@ const HomeTwo = ({ msgAlert }) => {
 	}
 	return (
 		<>
-			
 			<h2>Home Page</h2>
 			{upload.url ? ( <img className={'display-image'} alt={upload.url} src={upload.url}/> ) : '' }
 			{loading ? (<Spinner animation="border" />) : ''}
@@ -45,7 +44,7 @@ const HomeTwo = ({ msgAlert }) => {
 				<Form.Label>Default file input example</Form.Label>
 				<Form.Control type="file" onChange={handleChange} />
 			</Form.Group>
-			<Button type="submit" variant="outline-secondary">Secondary</Button>
+			<Button type="submit" variant="outline-secondary">Submit</Button>
 			</Form>
 		</>
 	)

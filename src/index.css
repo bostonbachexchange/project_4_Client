@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.Btn-Blue-BG.active {
+  background-color: rgb(42, 153, 42) !important;
+}
+
+:visited {
+  color: rgb(100, 0, 128);
+}
+
+/* :hover {
+  color: teal;
+} */
+.playFont {
+  font-family: 'Pathway Gothic One', sans-serif;
+}
+
+.navTitle {
+  color: teal;
+}

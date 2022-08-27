@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import LoadingScreen from '../shared/LoadingScreen'
@@ -16,14 +16,14 @@ const MySongList = (props) => {
  return (
     
     <>
-        <p>hello world</p>
+        <h1>My Song List</h1>
         {!user ?(
             <p>no user true</p> 
          ) : ( 
            repList.map(rep => 
         
             <>
-            {console.log(rep)}
+            <Container>
               <Card key={rep._id} className='m-2'>
                   <Card.Header><h1><Link to={`/songs/${rep._id}`}>{rep.title}</Link></h1></Card.Header>
                   <Card.Body>
@@ -43,6 +43,7 @@ const MySongList = (props) => {
                       </Card.Text>
                   </Card.Body>
               </Card>
+              </Container>
            </>
               )
         )}

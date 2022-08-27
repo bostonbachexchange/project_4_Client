@@ -1,37 +1,36 @@
 import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import { NavDropdown } from 'react-bootstrap'
+
 import { Link } from 'react-router-dom'
 const linkStyle = {
+    color: 'teal',
+    textDecoration: 'none'
+}
+const homeStyle = {
     color: 'white',
     textDecoration: 'none'
 }
 const authenticatedOptions = (
 	<>
 		<Nav.Item className='m-2'>
-			<Link to='change-password' style={linkStyle}>
-				Change Password
+			<Link to='messageboard' style={linkStyle}>
+				Messageboard
 			</Link>
 		</Nav.Item>
-		<Nav.Item className='m-2'>
-			<Link to='sign-out' style={linkStyle}>
-				Sign Out
-			</Link>
-		</Nav.Item>
-		{/* Build API IN BACK END? */}
-		<Nav.Item className='m-2'>
+
+		<NavDropdown   title={
+        <span className="navTitle">Songs</span>
+    } menuVariant="dark" style={linkStyle}>
+		<Nav.Item className='m-2 myLink'>
 			<Link to='mysongs' style={linkStyle}>
 				My Song List
 			</Link>
 		</Nav.Item>
 		<Nav.Item className='m-2'>
 			<Link to='songs' style={linkStyle}>
-				Songs
-			</Link>
-		</Nav.Item>
-		<Nav.Item className='m-2'>
-			<Link to='messageboard' style={linkStyle}>
-				Messageboard
+				Song Index
 			</Link>
 		</Nav.Item>
 		<Nav.Item className='m-2'>
@@ -39,8 +38,59 @@ const authenticatedOptions = (
 				Add a Song
 			</Link>
 		</Nav.Item>
+		</NavDropdown>
+		
+		<NavDropdown   title={
+        <span className="navTitle">My Account</span>
+    } menuVariant="dark" style={linkStyle}>
+			<Nav.Item eventKey='1' className='m-2'>
+				<Link to='change-password' style={linkStyle}>
+					Change Password
+				</Link>
+			</Nav.Item >
+			<Nav.Item eventKey='2' className='m-2'>
+				<Link to='sign-out' style={linkStyle}>
+					Sign Out
+				</Link>
+			</Nav.Item>
+		</NavDropdown>
 	</>
 )
+// const authenticatedUserOptions = (
+// 	<>
+// 		<Nav.Item className='m-2'>
+// 			<Link to='change-password' style={linkStyle}>
+// 				Change Password
+// 			</Link>
+// 		</Nav.Item>
+// 		<Nav.Item className='m-2'>
+// 			<Link to='sign-out' style={linkStyle}>
+// 				Sign Out
+// 			</Link>
+// 		</Nav.Item>
+// 		{/* Build API IN BACK END? */}
+// 		<Nav.Item className='m-2'>
+// 			<Link to='mysongs' style={linkStyle}>
+// 				My Song List
+// 			</Link>
+// 		</Nav.Item>
+// 		<Nav.Item className='m-2'>
+// 			<Link to='songs' style={linkStyle}>
+// 				Songs
+// 			</Link>
+// 		</Nav.Item>
+// 		<Nav.Item className='m-2'>
+// 			<Link to='messageboard' style={linkStyle}>
+// 				Messageboard
+// 			</Link>
+// 		</Nav.Item>
+// 		<Nav.Item className='m-2'>
+// 			<Link to='create-song' style={linkStyle}>
+// 				Add a Song
+// 			</Link>
+// 		</Nav.Item>
+// 	</>
+// )
 
 const unauthenticatedOptions = (
 	<>
@@ -53,15 +103,15 @@ const unauthenticatedOptions = (
 	</>
 )
 
-const alwaysOptions = (
-	<>
-		<Nav.Item className='m-2'>
-			<Link to='/' style={linkStyle}>
-				Home
-			</Link>
-		</Nav.Item>
-	</>
-)
+// const alwaysOptions = (
+// 	<>
+// 		<Nav.Item className='m-2'>
+// 			<Link to='/' style={linkStyle}>
+// 				Home
+// 			</Link>
+// 		</Nav.Item>
+// 	</>
+// )
 
 const Header = ({ user }) => (
 	<Navbar bg='dark' variant='dark' expand='md'>
@@ -77,9 +127,9 @@ const Header = ({ user }) => (
 			<Nav className='m-2'>
 			{/* <Nav className='ml-auto' className='m-2'> */}
 				{user && (
-					<span className='navbar-text mr-2'>Welcome, {user.email}</span>
+					<span className='navbar-text mr-2' style={linkStyle}>Welcome, {user.email}</span>
 				)}
-				{alwaysOptions}
+				{/* {alwaysOptions} */}
 				{user ? authenticatedOptions : unauthenticatedOptions}
 			</Nav>
 		</Navbar.Collapse>
