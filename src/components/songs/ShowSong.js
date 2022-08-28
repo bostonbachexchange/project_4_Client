@@ -14,10 +14,11 @@ const ShowSong = (props) => {
     const [updated, setUpdated] = useState(false)
 
     const { id } = useParams()
-    const { msgAlert, user, userList } = props
+    const { msgAlert, user } = props
     console.log('user in showSong', user)
     console.log('song in showSong', song)
     const navigate = useNavigate()
+    const testLyrics = "Lorem ipsum, Lorem ipsum Lorem % ipsum Lorem ipsum Lorem ipsum % % Lorem ipsum % Lorem ipsum Lorem ipsum Lorem ipsum%Lorem ipsum%Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum % % % % %Lorem ipsum"
 
     useEffect(() => {
         getOneSong(id)
@@ -32,6 +33,7 @@ const ShowSong = (props) => {
                 navigate('/')
             })
     }, [updated])
+
 
     if (!song) {
         return <LoadingScreen />
@@ -85,8 +87,28 @@ const ShowSong = (props) => {
                         {song.composer ?(<div><strong>composer:</strong> {song.composer}</div>) : (null)}
                         {song.lyricist ?(<div><strong>lyricist:</strong> {song.lyricist}</div>) : (null)}
                         {song.scorePDF ?(<div><strong>scorePDF:</strong> {song.scorePDF}</div>) : (null)}
+
                         {song.type ?(<div><strong>type:</strong> {song.type}</div>) : (null)}
                         {song.recordings ?(<div><strong>recordings:</strong> {song.recordings}</div>) : (null)}
+
+                        {/* loop lyrics */}
+                        {song.lyrics ?(<div><strong>Lyrics:</strong> {
+
+                       song.lyrics.split("|").map(line => (
+                            <div>{line}</div>
+                        ) )
+                            
+                        }
+                        </div>) : (null)}
+                        {/* {testLyrics ?(<div><strong>Lyrics:</strong> {
+
+                       testLyrics.split("%").map(line => (
+                            <div>{line}</div>
+                        ) )
+                            
+                        }
+                        </div>) : (null)} */}
+
                         {song.embedId ?(<div className='m-2'>
                             <YoutubeEmbed embedId={song.embedId} />
                         </div>) : (null)}

@@ -1,11 +1,10 @@
 import React from "react";
 import { Card, Container, Button } from "react-bootstrap";
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import LoadingScreen from '../shared/LoadingScreen'
 import YoutubeEmbed from "../shared/YoutubeEmbed";
 import { deleteSongfromUser } from "../../api/songs";
-// import { getMYSongs } from '../../api/USER'
 import messages from '../shared/AutoDismissAlert/messages'
 
 const MySongList = (props) => {
@@ -13,15 +12,13 @@ const MySongList = (props) => {
     const [updated, setUpdated] = useState(false)
     const [userList, setUserList] = useState([])
     const [userSet, setUserSet] = useState(false)
-    const navigate = useNavigate()
 
     let repList = user?.myList
-
-    console.log('user in MySongList', user?.myList)
-    console.log('repList', repList)
+    // console.log('repList', repList)
+    // console.log('user in MySongList', user?.myList)
 
     const setTheUser = () => {
-        console.log('here is the repList to push into user', repList)
+        // console.log('here is the repList to push into user', repList)
         setUserList(repList)
         setUserSet(true)
         console.log('here is the userList', userList)
@@ -30,6 +27,7 @@ const MySongList = (props) => {
     useEffect(() => {
         if(!userSet) {
             setTheUser()
+            setUserList(repList)
             console.log('useEffect ran')
         }
     }, [repList])
@@ -54,10 +52,6 @@ const MySongList = (props) => {
                     message: messages.removeSongSuccess,
                     variant: 'success'
                 })
-                // repList = filterCloneArray
-                // console.log('new repList is filterClone??....', repList)
-                // // setUserList(repList)
-                // console.log('new userlist after delete', userList)
         })
         .then(() => setUpdated(!updated))
         .catch(err => {
@@ -76,10 +70,10 @@ const MySongList = (props) => {
         {!user ?(
             <p><LoadingScreen/></p> 
         ) : ( 
-        //    repList.map(rep => 
-           userList.map(rep => 
-        
+            userList.map(rep => 
+                //    repList.map(rep => 
             <>
+            
                 <Container>
                     <Card key={rep._id} className='m-2 playFont'>
                         <Card.Header><h1><Link to={`/songs/${rep._id}`}>{rep.title}</Link></h1></Card.Header>

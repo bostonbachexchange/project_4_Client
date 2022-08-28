@@ -44,7 +44,7 @@ const SongForm = (props) => {
 
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="lyrics">Lyrics</Form.Label>
-                    <Form.Control value={song.lyrics} className="w-50" as="textarea" rows={4} placeholder="song lyrics"  name="lyrics" id="lyrics" onChange={ handleChange }/>
+                    <Form.Control value={song.lyrics} className="m-2" as="textarea" rows={5} placeholder="song lyrics"  name="lyrics" id="lyrics" onChange={ handleChange }/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
