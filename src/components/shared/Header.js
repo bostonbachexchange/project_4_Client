@@ -66,13 +66,13 @@ const authenticatedOptions = (
 const unauthenticatedOptions = (
 	<>
         <Nav.Item className='m-2'>
-		    <Link to='sign-up' style={linkStyle}>
-				<span className='HoverClass1'>Sign Up</span>
+		    <Link to='sign-in' style={linkStyle}>
+				<span className='HoverClass1'>Sign In</span>
 			</Link>
         </Nav.Item>
         <Nav.Item className='m-2'>
-		    <Link to='sign-in' style={linkStyle}>
-				<span className='HoverClass1'>Sign In</span>
+		    <Link to='sign-up' style={linkStyle}>
+				<span className='HoverClass1'>Sign Up</span>
 			</Link>
         </Nav.Item>
 	</>

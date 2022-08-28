@@ -14,7 +14,7 @@ const ShowSong = (props) => {
     const [updated, setUpdated] = useState(false)
 
     const { id } = useParams()
-    const { msgAlert, user } = props
+    const { msgAlert, user, userList } = props
     console.log('user in showSong', user)
     console.log('song in showSong', song)
     const navigate = useNavigate()
@@ -57,6 +57,7 @@ const ShowSong = (props) => {
     }
     const addTheSong = () => {
         addSongToUser(user, song._id)
+            // .then(res => {navigate('/mysongs')})
             .then(() => {
                 msgAlert({
                     heading: 'Success',
@@ -64,7 +65,7 @@ const ShowSong = (props) => {
                     variant: 'success'
                 })
             })
-            // .then(() => {navigate('/songs')})
+            .then(() =>  setUpdated(!updated))
             .catch(err => {
                 msgAlert({
                     heading: 'Error adding song',
@@ -89,16 +90,6 @@ const ShowSong = (props) => {
                         {song.embedId ?(<div className='m-2'>
                             <YoutubeEmbed embedId={song.embedId} />
                         </div>) : (null)}
-
-                        {/* <div><small>lyricist: {song.lyricist}</small></div>
-                        <div><small>lyrics: {song.lyrics}</small></div>
-                        <div><small>score: <img scr={song.scorePDF}></img></small></div>
-                        <div><small>type: {song.type}</small></div>
-                        <div><a href={song.recordings}>recording</a></div>
-                        <div>
-                            <h1>Youtube Embed</h1>
-                            <YoutubeEmbed embedId={song.embedId} />
-                        </div> */}
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
@@ -108,7 +99,7 @@ const ShowSong = (props) => {
                         song.owner && user && song.owner._id === user._id 
                         ?
                         <>
-                            <Button onClick={() => setEditModalShow(true)}      className="m-2" variant="warning">
+                            <Button onClick={() => setEditModalShow(true)} className="m-2" variant="warning">
                             Edit Song
                             </Button>
                             <Button onClick={() => removeTheSong()} className="m-2" variant="danger">

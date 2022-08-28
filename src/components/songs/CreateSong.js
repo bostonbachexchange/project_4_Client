@@ -7,7 +7,7 @@ import { useState } from 'react'
 const CreateSong = (props) => {
     const { user, msgAlert } = props
     const navigate = useNavigate()
-    const [ selected, setSelected ] = useState(null)
+    // const [ selected, setSelected ] = useState(null)
     const [song, setSong] = useState({
         title: '',
         composer:  '',
@@ -32,14 +32,14 @@ const CreateSong = (props) => {
             }
 
         })
-        setSelected(e.target.files[0])
+        // setSelected(e.target.files[0])
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         // added this janke
-        const data = new FormData()
-        data.append('upload', selected)
+        // const data = new FormData()
+        // data.append('upload', selected)
         createSong(user, song)
             .then(res => { navigate(`/songs/${res.data.song._id}`)})
             // .then(res => console.log('this is the res from api call', res))

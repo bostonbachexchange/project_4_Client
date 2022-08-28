@@ -1,17 +1,73 @@
 import React from "react";
-import { Card, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Card, Container, Button } from "react-bootstrap";
+import { useNavigate, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import LoadingScreen from '../shared/LoadingScreen'
 import YoutubeEmbed from "../shared/YoutubeEmbed";
+import { deleteSongfromUser } from "../../api/songs";
 // import { getMYSongs } from '../../api/USER'
 import messages from '../shared/AutoDismissAlert/messages'
 
 const MySongList = (props) => {
-    const { user } = props
-    console.log('user in MySongList', user?.myList)
+    const { user, msgAlert } = props
+    const [updated, setUpdated] = useState(false)
+    const [userList, setUserList] = useState([])
+    const [userSet, setUserSet] = useState(false)
+    const navigate = useNavigate()
+
     let repList = user?.myList
 
+    console.log('user in MySongList', user?.myList)
+    console.log('repList', repList)
+
+    const setTheUser = () => {
+        console.log('here is the repList to push into user', repList)
+        setUserList(repList)
+        setUserSet(true)
+        console.log('here is the userList', userList)
+    }
+
+    useEffect(() => {
+        if(!userSet) {
+            setTheUser()
+            console.log('useEffect ran')
+        }
+    }, [repList])
+
+    const removeTheSong = (rep) => {
+        console.log('here is the rep', rep)
+        deleteSongfromUser(user, rep.rep._id)
+            .then((item) => {
+                const cloneArray = JSON.parse(JSON.stringify(userList));
+                console.log('cloneArray', cloneArray)
+                const filterCloneArray =  cloneArray.filter((item) => {
+                    return item._id !== rep.rep._id
+                })
+
+                console.log('filterCloneArray', filterCloneArray)
+                console.log('userList123123', userList)
+                console.log('item', item)
+                setUserList(filterCloneArray)
+
+                msgAlert({
+                    heading: 'Success',
+                    message: messages.removeSongSuccess,
+                    variant: 'success'
+                })
+                // repList = filterCloneArray
+                // console.log('new repList is filterClone??....', repList)
+                // // setUserList(repList)
+                // console.log('new userlist after delete', userList)
+        })
+        .then(() => setUpdated(!updated))
+        .catch(err => {
+            msgAlert({
+                heading: 'Error removing song',
+                message: messages.removeSongFailure,
+                variant: 'danger'
+            })
+        })
+    }
 
  return (
     <>
@@ -20,7 +76,8 @@ const MySongList = (props) => {
         {!user ?(
             <p><LoadingScreen/></p> 
         ) : ( 
-           repList.map(rep => 
+        //    repList.map(rep => 
+           userList.map(rep => 
         
             <>
                 <Container>
@@ -40,6 +97,9 @@ const MySongList = (props) => {
                         </Card.Body>
                     </Card>
                 </Container>
+                <Button onClick={() => removeTheSong({rep})} className="m-2" variant="danger">
+                    Remove my repertoire list
+                </Button>
            </>
             )
         )}
