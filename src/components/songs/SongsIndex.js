@@ -33,16 +33,16 @@ const SongsIndex = (props) => {
 
     const songCards = songs.map(song => 
         <Card key={song.id} className='m-2 playFont'>
-            <Card.Header>
-                <strong><Link to={`/songs/${song._id}`}>{song.title}</Link></strong>
+            <Card.Header className='text-center'>
+                <h3><strong><Link to={`/songs/${song._id}`}>{song.title}</Link></strong></h3>
             </Card.Header>
             <Card.Body>
                 <Card.Text>
                     <div>Music by {song.composer ?(<em>{song.composer}</em>) : (<em>Unknown</em>)}</div> 
                     <div>Lyrics by {song.lyricist ?(<em>{song.lyricist}</em>) : (<em>Unknown</em>)}</div>
                     <div>Includes: 
-                        {song.lyrics ?(<small>lyrics</small>) : (null)}
-                        {song.recordings ?(<small> recordings</small>) : (null)}
+                        {song.lyrics ?(<small> lyrics</small>) : (null)}
+                        {song.recordings ?(<small>, recordings</small>) : (null)}
                         {song.embedId ?(<small>, video</small>) : (null)}
                         {song.scorePDF ?(<small>, score</small>) : (null)}
                     </div>

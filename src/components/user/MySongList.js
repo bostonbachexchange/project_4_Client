@@ -65,15 +65,14 @@ const MySongList = (props) => {
 
  return (
     <>
-        <h1 className="m-2 playFont">My Song List</h1>
-
+        <h1 className="m-2 playFont text-center">My Song List</h1>
+        <hr></hr>
         {!user ?(
             <p><LoadingScreen/></p> 
         ) : ( 
             userList.map(rep => 
                 //    repList.map(rep => 
             <>
-            
                 <Container>
                     <Card key={rep._id} className='m-2 playFont'>
                         <Card.Header><h1><Link to={`/songs/${rep._id}`}>{rep.title}</Link></h1></Card.Header>
@@ -91,9 +90,10 @@ const MySongList = (props) => {
                         </Card.Body>
                     </Card>
                 </Container>
-                <Button onClick={() => removeTheSong({rep})} className="m-2" variant="danger">
-                    Remove my repertoire list
-                </Button>
+                <div className="text-center">
+                <Button onClick={() => removeTheSong({rep})} className="m-2 text-center" variant="danger">
+                    Remove from repertoire list
+                </Button></div>
            </>
             )
         )}

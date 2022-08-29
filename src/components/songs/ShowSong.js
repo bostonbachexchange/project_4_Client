@@ -8,9 +8,19 @@ import { Button, Card, Container } from 'react-bootstrap'
 import YoutubeEmbed from '../shared/YoutubeEmbed'
 import EditSongModal from './EditSongModal'
 
+import { Document, Page } from 'react-pdf'
+import scoreExample from '../../scores/pexels.jpg'
+import ReactAudioPlayer from 'react-audio-player'
+// import songs from '../../audio/jobim.mp3'
+import jobim from '../../audio/jobim.mp3'
+import chopin from '../../audio/chopinwaltz.mp3'
+
+const tuneMap = {jobim, chopin}
+
 const ShowSong = (props) => {
     const [song, setSong] = useState(null)
     const [editModalShow, setEditModalShow] = useState(false)
+    const [audio, setAudio] = useState(null)
     const [updated, setUpdated] = useState(false)
 
     const { id } = useParams()
@@ -18,11 +28,13 @@ const ShowSong = (props) => {
     console.log('user in showSong', user)
     console.log('song in showSong', song)
     const navigate = useNavigate()
-    const testLyrics = "Lorem ipsum, Lorem ipsum Lorem % ipsum Lorem ipsum Lorem ipsum % % Lorem ipsum % Lorem ipsum Lorem ipsum Lorem ipsum%Lorem ipsum%Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum % % % % %Lorem ipsum"
 
     useEffect(() => {
         getOneSong(id)
-            .then(res => setSong(res.data.song))
+            .then(res => {
+                setSong(res.data.song)
+                setAudio()
+            })
             .catch(err => {
 
                 msgAlert({
@@ -59,7 +71,6 @@ const ShowSong = (props) => {
     }
     const addTheSong = () => {
         addSongToUser(user, song._id)
-            // .then(res => {navigate('/mysongs')})
             .then(() => {
                 msgAlert({
                     heading: 'Success',
@@ -76,12 +87,12 @@ const ShowSong = (props) => {
                 })
             })
     }
-
+    console.log('song', song.recordings)
     return (
         <>
         <Container className='m-2 fluid playFont'>
             <Card>
-                <Card.Header><h2>{ song.title}</h2></Card.Header>
+                <Card.Header className='text-center'><h2>{ song.title}</h2></Card.Header>
                 <Card.Body>
                     <Card.Text>
                         {song.composer ?(<div><strong>composer:</strong> {song.composer}</div>) : (null)}
@@ -89,35 +100,38 @@ const ShowSong = (props) => {
                         {song.scorePDF ?(<div><strong>scorePDF:</strong> {song.scorePDF}</div>) : (null)}
 
                         {song.type ?(<div><strong>type:</strong> {song.type}</div>) : (null)}
-                        {song.recordings ?(<div><strong>recordings:</strong> {song.recordings}</div>) : (null)}
-
-                        {/* loop lyrics */}
+                        {/* {song.recordings ?(<div><strong>recordings:</strong> {song.recordings}</div>) : (null)} */}
+                    <Card className='m-2'>
+                        <Card.Header><strong>Recording</strong></Card.Header>
+                      <Card.Body className='text-center'>
+                            <ReactAudioPlayer 
+                                src={
+                                    tuneMap[song.recordings]
+                                }
+                                controls
+                        />
+                    </Card.Body>
+                    </Card>
+                    <hr></hr>
                         {song.lyrics ?(<div><strong>Lyrics:</strong> {
-
-                       song.lyrics.split("|").map(line => (
-                            <div>{line}</div>
-                        ) )
-                            
+                            song.lyrics.split("|").map(line => (
+                                <div className='text-center'>{line}</div>)
+                            ) 
                         }
                         </div>) : (null)}
-                        {/* {testLyrics ?(<div><strong>Lyrics:</strong> {
-
-                       testLyrics.split("%").map(line => (
-                            <div>{line}</div>
-                        ) )
-                            
-                        }
-                        </div>) : (null)} */}
-
+                        <hr></hr>
                         {song.embedId ?(<div className='m-2'>
                             <YoutubeEmbed embedId={song.embedId} />
                         </div>) : (null)}
                     </Card.Text>
                 </Card.Body>
-                <Card.Footer>
-                    {/* // this will show user the edit button if they 'own' the song, We want to make it so you can edit the song if you are an administrator */}
+
+                <Document file={scoreExample} >
+                    <Page pageNumber='1'></Page>
+                </Document>
+
+                <Card.Footer className='text-center'>
                     {
-                        // song.owner && user && song.owner === user._id 
                         song.owner && user && song.owner._id === user._id 
                         ?
                         <>
@@ -127,11 +141,8 @@ const ShowSong = (props) => {
                             <Button onClick={() => removeTheSong()} className="m-2" variant="danger">
                                 Delete The Song
                             </Button>
-
-                            {/* ADD A BUTTON TO ADD SONG TO PRACTICE LIST */}
                         </>
                     :
-                    // in theory......
                     <p>Only an Admin can edit this song</p>
                     }
                     <Button onClick={() => addTheSong()} className="m-2" variant="info">

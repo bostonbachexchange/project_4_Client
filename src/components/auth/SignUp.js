@@ -56,11 +56,12 @@ const SignUp = (props) => {
 
 
     return (
-        <div className='row'>
+        <div className='row playFont'>
             <div className='col-sm-10 col-md-8 mx-auto mt-5'>
                 <h3>Sign Up</h3>
+                <hr></hr>
                 <Form onSubmit={onSignUp}>
-                    <Form.Group controlId='email'>
+                    <Form.Group controlId='email' className="m-2">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
                             required
@@ -71,7 +72,7 @@ const SignUp = (props) => {
                             onChange={e => setEmail(e.target.value)}
                         />
                     </Form.Group>
-                    <Form.Group controlId='password'>
+                    <Form.Group controlId='password' className="m-2">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             required
@@ -82,7 +83,7 @@ const SignUp = (props) => {
                             onChange={e => setPassword(e.target.value)}
                         />
                     </Form.Group>
-                    <Form.Group controlId='passwordConfirmation'>
+                    <Form.Group controlId='passwordConfirmation' className="m-2">
                         <Form.Label>Password Confirmation</Form.Label>
                         <Form.Control
                             required
@@ -93,7 +94,7 @@ const SignUp = (props) => {
                             onChange={e => setPasswordConfirmation(e.target.value)}
                         />
                     </Form.Group>
-                    <Button variant='primary' type='submit'>
+                    <Button className="m-2" variant='primary' type='submit'>
                         Submit
                     </Button>
                 </Form>

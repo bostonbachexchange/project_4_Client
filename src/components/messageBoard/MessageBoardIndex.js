@@ -36,25 +36,25 @@ const MessageBoardIndex = (props) => {
 
     const messageboardCards = messageboard.map(messagepost =>
         <>
-        <hr></hr>
         <Card key={messagepost._id} className='m-2 playFont'>
         {/* <Card key={message._id} className='m-2'> */}
             <Card.Header><strong>{messagepost.title}</strong> by <em>{messagepost.owner.email}</em></Card.Header>
-            <Card.Body>
+            <Card.Body className='p-1'>
                 <Card.Text>
-                    <Link to={`/messageboard/${messagepost._id}`}><span> {messagepost.content}</span></Link>
+                    <div className='text-center'><Link to={`/messageboard/${messagepost._id}`}><span> {messagepost.content}</span></Link></div>
+                    <hr></hr>
+                    <small className='m-1'>{messagepost.comments.length} <em>comments</em></small>
                 </Card.Text>
             </Card.Body>
         </Card>
-        <hr></hr>
-        {/* <CommentForm /> */}
         </>
-        )
+    )
+    
     return (
         <>
+            <h1 className='m-2 playFont text-center'>Community Message Board</h1>
             <hr></hr>
-            <h1 className='m-2 playFont'>Community Message Board</h1>
-            <div className='m-2'>{messageboardCards}</div>
+            <div className='m-2 playFont'>{messageboardCards}</div>
         </>
     )
 }

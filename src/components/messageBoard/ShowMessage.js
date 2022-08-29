@@ -8,6 +8,7 @@ import messages from '../shared/AutoDismissAlert/messages'
 import { Button, Card, Container } from 'react-bootstrap'
 import EditMessageModal from './EditMessageModal'
 import NewCommentModal from '../comments/NewCommentModal'
+import EditCommentModal from '../comments/EditCommentModal'
 
 const ShowMessage = (props) => {
     const [message, setMessage] = useState(null)
@@ -57,7 +58,6 @@ const ShowMessage = (props) => {
             })
     }
 
-    // create another component???
     const removeTheComment = (cmt) => {
         console.log("!!!!", cmt)
         removeComment(user, message._id, cmt._id)
@@ -68,8 +68,7 @@ const ShowMessage = (props) => {
                     variant: 'success'
                 })
             })
-            // ????
-            // .then(() => triggerRefresh())
+            .then(() => setUpdated(!updated))
             .catch(err => {
                 msgAlert({
                     heading: 'Error removing message',
@@ -78,60 +77,66 @@ const ShowMessage = (props) => {
                 })
             })
     }
-        // could be turned into componet
-        // needs styling
-        // pass comment id?
+
     const commentList = message.comments.map(cmt => 
-        <>
-        <Card>
-        {/* {cmt.owner.email} */}
-            <p>{cmt.content} from {cmt.owner.email}
-            {message.owner && user && message.owner._id === user._id 
+        <Card className='m-2 p-0'>
+            <Card.Body className='p-0'>
+                <p className='m-2 p-0'><strong>{cmt.content}</strong></p>
+                <hr></hr>
+                <p className='m-2 p-0'>from <em>{cmt.owner.email}</em></p>
+                <hr></hr>
+            </Card.Body>
+            {cmt.owner && user && cmt.owner._id === user._id 
                 ?
                 <>
-            <span>
-                <Button onClick={() => removeTheComment()} className="m-2 " variant="info" > Edit📝 </Button>                     
-                <Button onClick={() => removeTheComment(cmt)} className="m-2 " variant="info" > Delete🗑 </Button>                     
-                </span>
+                    <div className='text-center p-0 m-0'>
+                        <Button onClick={() => EditCommentModal()} className="m-2 p-0" variant="info" > Edit📝 </Button>                
+                        <Button onClick={() => removeTheComment(cmt)} className="m-2 p-0" variant="danger" > Delete🗑 </Button>                     
+                    </div>
                 </>
                 :
                 null
             }  
-            </p> 
         </Card>
-        </>
         ) 
+
     return (
         <>
-        <Container className='fluid'>
-            <Card>
-                <Card.Header>{ message.title} from {message.owner.email}</Card.Header>
+        <Container className='fluid playFont'>
+            <Card className="m-2">
+                <Card.Header  className='text-center'>
+                    <h1><strong>{ message.title}</strong></h1>
+                    <span><small>from <em>{message.owner.email}</em></small></span>
+                </Card.Header>
                 <Card.Body>
-                    <Card.Text>
-                        <div><small>content {message.content}</small></div>
+                    <Card.Text className='text-center m-2'>
+                        <>{message.content}</>
                     </Card.Text>
                 </Card.Body>
-                    <Card.Footer>
-                        <div><small>{commentList}</small></div>
-                    </Card.Footer>
-                <Card.Footer>
-                    <Button onClick={()=> setCommentModalShow(true)} className='m-2' variant='info'>Post a comment</Button>
-                    {/* // this will show user the edit button if they 'own' the song, We want to make it so you can edit the song if you are an administrator */}
+                <Card.Footer className='p-4'>
+                    <div><small>{commentList}</small></div>
+                </Card.Footer>
+                <Card.Footer className='p-0 text-center'>
+                    <Button 
+                        onClick={()=> setCommentModalShow(true)} 
+                        className='m-2' 
+                        variant='info'
+                    >
+                            Post a comment
+                    </Button>
+
                     {
-                    // song.owner && user && song.owner === user._id 
                     message.owner && user && message.owner._id === user._id 
                     ?
                         <>
-                            <Button onClick={() => setEditModalShow(true)}      className="m-2" variant="warning">
-                            Edit Post
+                            <Button onClick={() => setEditModalShow(true)} className="m-2" variant="warning">
+                                Edit Post
                             </Button>
                             <Button onClick={() => removeTheMessage()} className="m-2" variant="danger">
                                 Delete Post
                             </Button>
-                            {/* ADD A BUTTON TO ADD SONG TO PRACTICE LIST */}
                         </>
                     :
-                    // in theory......
                     <p>you cannot edit this message</p>
                     }
                 </Card.Footer>
@@ -145,6 +150,15 @@ const ShowMessage = (props) => {
             msgAlert={msgAlert}
             triggerRefresh={() => setUpdated(updated => !updated)}
             handleClose={() => setEditModalShow(false)}
+        />
+        <EditCommentModal 
+            user={user}
+            message={message}
+            comment={comment}
+            show={editModalShow}
+            handleClose={() => setEditModalShow(false)}
+            msgAlert={msgAlert}
+            triggerRefresh={triggerRefresh}
         />
         <NewCommentModal 
             message={message}
