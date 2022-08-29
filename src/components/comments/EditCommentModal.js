@@ -4,6 +4,7 @@ import CommentForm from "../shared/CommentForm";
 import { updateComment } from '../../api/comments'
 
 const EditCommentModal = (props) => {
+    // console.log('what is user', user.props)
     const { user, message, show, handleClose, msgAlert, triggerRefresh } = props
     const [comment, setComment] = useState(props.comment)
     
@@ -27,7 +28,7 @@ const EditCommentModal = (props) => {
         e.preventDefault()
 
         updateComment(user, message._id, comment)
-            // .then(() => comment.owner = user._id)
+            .then(() => comment.owner = user._id)
             .then(() => handleClose())
             // .then(res => console.log('this is the res from api call', res))
             .then(() => {
