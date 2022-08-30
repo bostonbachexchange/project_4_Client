@@ -51,7 +51,7 @@ const NewCommentModal = (props) => {
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton />
             <Modal.Body>
-                {/* <CommentForm comment={comment} handleChange={handleChange} handleSubmit={handleSubmit} heading="Post a Comment" /> */}
+                <CommentForm comment={comment} handleChange={handleChange} handleSubmit={handleSubmit} heading="Post a Comment" />
             </Modal.Body>
         </Modal>
     )

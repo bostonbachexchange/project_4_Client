@@ -63,6 +63,11 @@ const MySongList = (props) => {
         })
     }
 
+    if (!userList) {
+        return <LoadingScreen />
+    } else if (userList.length === 0) {
+        return <p>It looks like you haven't added any repertoire yet. Try adding some from the <Link to="/songs">Song Index</Link></p>
+    }
  return (
     <>
         <h1 className="m-2 playFont text-center">My Song List</h1>
