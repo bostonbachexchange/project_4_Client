@@ -8,7 +8,10 @@ import { Button, Card, Container } from 'react-bootstrap'
 import YoutubeEmbed from '../shared/YoutubeEmbed'
 import EditSongModal from './EditSongModal'
 
-import { Document, Page } from 'react-pdf'
+import { Document, Page, pdfjs } from 'react-pdf'
+// pdfjs.GlobalWorkerOptions.workerSrc = "cdnjs.cloudflare.com/ajax/libs/pdf.js/^5.7.2/pdf.worker.js";
+// pdfjs.GlobalWorkerOptions.workerSrc = cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js;
+
 import scoreExample from '../../scores/pexels.jpg'
 import ReactAudioPlayer from 'react-audio-player'
 // import songs from '../../audio/jobim.mp3'
@@ -126,9 +129,9 @@ const ShowSong = (props) => {
                     </Card.Text>
                 </Card.Body>
 
-                <Document file={scoreExample} >
-                    <Page pageNumber='1'></Page>
-                </Document>
+                <iframe file={scoreExample} >
+                    <Page ></Page>
+                </iframe>
 
                 <Card.Footer className='text-center'>
                     {

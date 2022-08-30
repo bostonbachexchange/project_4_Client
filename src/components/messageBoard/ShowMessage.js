@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 import LoadingScreen from '../shared/LoadingScreen'
 import { getOneMessage, updateMessage, removeMessage } from '../../api/messageboard'
-import { removeComment } from '../../api/comments'
+import { removeComment, updateComment } from '../../api/comments'
 import messages from '../shared/AutoDismissAlert/messages'
 import { Button, Card, Container } from 'react-bootstrap'
 import EditMessageModal from './EditMessageModal'
@@ -14,7 +14,9 @@ const ShowMessage = (props) => {
     const [message, setMessage] = useState(null)
     const [editModalShow, setEditModalShow] = useState(false)
     const [commentModalShow, setCommentModalShow] = useState(false)
+    const [editCommentModalShow, setEditCommentModalShow] = useState(false)
     const [updated, setUpdated] = useState(false)
+    const [commentID, setCommentID] = useState(null)
 
     const { id } = useParams()
     const { msgAlert, user, comment, triggerRefresh } = props
@@ -77,6 +79,9 @@ const ShowMessage = (props) => {
                 })
             })
     }
+// const handleClick = () => ({
+//     setCommentID()
+// })
 
     const commentList = message.comments.map(cmt => 
         <Card className='m-2 p-0'>
@@ -90,7 +95,8 @@ const ShowMessage = (props) => {
                 ?
                 <>
                     <div className='text-center p-0 m-0'>
-                        <Button onClick={() => EditCommentModal()} className="m-2 p-0" variant="info" > Edit📝 </Button>                
+                        <Button commentId={cmt._id} onClick={() => (setCommentID(cmt._id), setEditCommentModalShow(true))} className="m-2 p-0" variant="info" > Edit📝 </Button>                
+                        {/* <Button commentId={cmt._id} onClick={handleClick} className="m-2 p-0" variant="info" > Edit📝 </Button>                 */}
                         <Button onClick={() => removeTheComment(cmt)} className="m-2 p-0" variant="danger" > Delete🗑 </Button>                     
                     </div>
                 </>
@@ -155,10 +161,12 @@ const ShowMessage = (props) => {
             user={user}
             message={message}
             comment={comment}
-            show={editModalShow}
-            handleClose={() => setEditModalShow(false)}
+            commentID={commentID}
+            show={editCommentModalShow}
+            handleClose={() => setEditCommentModalShow(false)}
             msgAlert={msgAlert}
-            triggerRefresh={triggerRefresh}
+            updated={updated}
+            setUpdated={setUpdated}
         />
         <NewCommentModal 
             message={message}

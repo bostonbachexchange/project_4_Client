@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Modal } from 'react-bootstrap'
 import CommentForm from "../shared/CommentForm";
 import { updateComment } from '../../api/comments'
+// import { updateMessageSuccess, updateMessageFailure } from '../shared/AutoDismissAlert/messages'
 
-const EditCommentModal = (props) => {
-    // console.log('props.user', props.user)    
-    const { user, message, show, handleClose, msgAlert, updated, setUpdated, commentID } = props
-    const [comment, setComment] = useState(props.comment)
-    console.log("commentID", commentID)
-    console.log('user', user)
+const UpdateCommentModal = (props) => {
+    const { user, message, show, handleClose, msgAlert, triggerRefresh } = props
+    const [comment, setComment] = useState({})
+
+    console.log('comment in updatecomment', comment)
+    
     const handleChange = (e) => {
         setComment(prevComment => {
             const value = e.target.value 
@@ -23,13 +24,14 @@ const EditCommentModal = (props) => {
             }
         })
     }
-console.log('We are in EditCommentModal')
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        updateComment(user, message._id, commentID, comment)
-            // .then(() => comment.owner = user._id)
+
+        updateComment(user, message._id, comment)
+            .then(() => comment.owner = user._id)
             .then(() => handleClose())
-            // .then(() => console.log('this is the update comment submit'))
+            // .then(res => console.log('this is the res from api call', res))
             .then(() => {
                 msgAlert({
                     heading: 'Oh Yeah!',
@@ -37,24 +39,22 @@ console.log('We are in EditCommentModal')
                     variant: 'success'
                 })
             })
-            .then(() => setUpdated(!updated))
-            .catch((error) => {
-                console.log('error', error)
+            .then(() => triggerRefresh())
+            .catch((error) => 
                 msgAlert({
                     heading: 'Oh No!',
                     message: 'Something went wrong, please try again',
                     variant: 'danger'
-                })})
+                }))
     }    
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton />
             <Modal.Body>
-                <CommentForm comment={comment} handleChange={handleChange} handleSubmit={handleSubmit} heading="Udate a Comment" />
-                {/* <CommentForm comment={comment} handleChange={handleChange} handleSubmit={handleSubmit} heading="Udate a Comment" /> */}
+                <CommentForm comment={comment} handleChange={handleChange} handleSubmit={handleSubmit} heading="Post a Comment" />
             </Modal.Body>
         </Modal>
     )
 }
 
- export default EditCommentModal
+ export default UpdateCommentModal

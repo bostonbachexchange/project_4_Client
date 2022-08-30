@@ -101,7 +101,7 @@ const App = () => {
 								<CreateMessage msgAlert={msgAlert} user={user} />
 							</RequireAuth>
 						}
-					/>
+					/> 
 					<Route
 						path='/messageboard/:id'
 						element={

@@ -5,26 +5,15 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 const SongForm = (props) => {
-    // title: String
-    // composer:  String
-    // lyricist:String,
-    // type: String,
-    // lyrics:String,
-    // scorePDF:String,
-    // recordings:String,
-    // embedId: String,
     const { song, handleChange, handleSubmit } = props
 
     return <>
-            <Form className='m-5' onSubmit={handleSubmit} name="uploaded_file">
-                <h3>Add a new song</h3>
+            <Form className='m-5 playFont' onSubmit={handleSubmit} name="uploaded_file">
+                <h3>Add a New Song to Our Collection</h3>
+                <hr></hr>
                 <Form.Group className="mb-3" >
                     <Form.Label column sm="2" htmlFor="title">Song Title</Form.Label>
                         <Form.Control className="w-50" placeholder="Title of the song" value={song.title} name="title" id="title" onChange={ handleChange }/>
-                    
-                    {/* <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text> */}
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -56,11 +45,6 @@ const SongForm = (props) => {
                     <Form.Label htmlFor="recordings">recordings</Form.Label>
                     <Form.Control className="w-50" placeholder="recordings" value={song.recordings} type='text' name="recordings" id="recordings" onChange={ handleChange }/>
                 </Form.Group>
-
-                {/* <Form.Group className="mb-3">
-                    <Form.Label htmlFor="recordings">Recording</Form.Label>
-                    <Form.Control placeholder="link to recording" value={song.recordings} name="recordings" id="recordings" onChange={ handleChange }/>
-                </Form.Group> */}
 
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="embedId">Embed Id from Youtube video</Form.Label>
