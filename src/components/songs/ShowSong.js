@@ -8,7 +8,7 @@ import { Button, Card, Container } from 'react-bootstrap'
 import YoutubeEmbed from '../shared/YoutubeEmbed'
 import EditSongModal from './EditSongModal'
 
-import { Document, Page, pdfjs } from 'react-pdf'
+import { Document, Page } from 'react-pdf'
 // pdfjs.GlobalWorkerOptions.workerSrc = "cdnjs.cloudflare.com/ajax/libs/pdf.js/^5.7.2/pdf.worker.js";
 // pdfjs.GlobalWorkerOptions.workerSrc = cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js;
 
@@ -21,7 +21,7 @@ import chopin from '../../audio/chopinwaltz.mp3'
 const tuneMap = {jobim, chopin}
 
 const ShowSong = (props) => {
-    const [song, setSong] = useState(null)
+    const [song, setSong] = useState({})
     const [editModalShow, setEditModalShow] = useState(false)
     const [audio, setAudio] = useState(null)
     const [updated, setUpdated] = useState(false)
@@ -32,11 +32,21 @@ const ShowSong = (props) => {
     console.log('song in showSong', song)
     const navigate = useNavigate()
 
+    // useEffect(function() {
+    //     async function getSong(){
+    //        const oneSong = await getOneSong(id)
+    //             setSong(oneSong)
+    //             console.log("song", song)
+    //         }
+// }, [updated])
+
     useEffect(() => {
         getOneSong(id)
             .then(res => {
+                console.log('res data', res.data.song)
                 setSong(res.data.song)
                 setAudio()
+                console.log('song', song)
             })
             .catch(err => {
 
@@ -129,9 +139,7 @@ const ShowSong = (props) => {
                     </Card.Text>
                 </Card.Body>
 
-                <iframe file={scoreExample} >
-                    <Page ></Page>
-                </iframe>
+                <img href='../../scores/pexels.jpg' />
 
                 <Card.Footer className='text-center'>
                     {
