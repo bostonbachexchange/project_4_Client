@@ -2,7 +2,7 @@ let apiUrl
 const apiUrls = {
     // YOU MUST CHANGE PRODUCTION URL WHEN DEPLOYING
 	// production: 'https://harmonyhaven.herokuapp.com',
-	production: 'https://web-production-3e1c.up.railway.app',
+	production: 'https://gleaming-genie-537e6b.netlify.app',
 	development: 'http://localhost:8000',
 }
 
