@@ -9,16 +9,17 @@ import YoutubeEmbed from '../shared/YoutubeEmbed'
 import EditSongModal from './EditSongModal'
 
 import { Document, Page } from 'react-pdf'
-// pdfjs.GlobalWorkerOptions.workerSrc = "cdnjs.cloudflare.com/ajax/libs/pdf.js/^5.7.2/pdf.worker.js";
-// pdfjs.GlobalWorkerOptions.workerSrc = cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js;
 
-import scoreExample from '../../scores/pexels.jpg'
 import ReactAudioPlayer from 'react-audio-player'
-// import songs from '../../audio/jobim.mp3'
+
+// recordings
 import jobim from '../../audio/jobim.mp3'
 import chopin from '../../audio/chopinwaltz.mp3'
+// scores
+import newScore from '../../scores/Mandoline.pdf'
 
 const tuneMap = {jobim, chopin}
+const scoreMap = {newScore}
 
 const ShowSong = (props) => {
     const [song, setSong] = useState({})
@@ -31,14 +32,6 @@ const ShowSong = (props) => {
     console.log('user in showSong', user)
     console.log('song in showSong', song)
     const navigate = useNavigate()
-
-    // useEffect(function() {
-    //     async function getSong(){
-    //        const oneSong = await getOneSong(id)
-    //             setSong(oneSong)
-    //             console.log("song", song)
-    //         }
-// }, [updated])
 
     useEffect(() => {
         getOneSong(id)
@@ -113,6 +106,7 @@ const ShowSong = (props) => {
                         {song.scorePDF ?(<div><strong>scorePDF:</strong> {song.scorePDF}</div>) : (null)}
 
                         {song.type ?(<div><strong>type:</strong> {song.type}</div>) : (null)}
+                        
                         {/* {song.recordings ?(<div><strong>recordings:</strong> {song.recordings}</div>) : (null)} */}
                     <Card className='m-2'>
                         <Card.Header><strong>Recording</strong></Card.Header>
@@ -138,8 +132,16 @@ const ShowSong = (props) => {
                         </div>) : (null)}
                     </Card.Text>
                 </Card.Body>
-
-                <img href='../../scores/pexels.jpg' />
+                <embed
+                    src={
+                        scoreMap[song.scorePDF]
+                    }
+                    type="application/pdf"
+                    frameBorder="0"
+                    scrolling="auto"
+                    height="600px"
+                    width="100%"
+                ></embed>
 
                 <Card.Footer className='text-center'>
                     {

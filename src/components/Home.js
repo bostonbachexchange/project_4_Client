@@ -1,16 +1,19 @@
 // import logo from '../assets/load.gif'
 import { Container } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import HolyCats from '../images/holycats.png'
+
 const Home = (props) => {
 	// const { msgAlert, user } = props
-	console.log('props in home', props)
 
 	const { msgAlert, user, background} = props
 	return (
 		<>
-			<Container  className="m-2 playFont">
-				<img scr="https://unsplash.com/photos/bu-6kNWQj6U"></img>
-				<h1>Welcome</h1>
+			<Container  className="m-2 playFont text-center">
+			<div>
+				<img className="rounded" style={{height: '200px'}} src={HolyCats} alt="HolyCats Image" />
+			</div>				
+			<h1>Welcome</h1>
 				<p>Harmony Haven is a supportive community that will give you the resources you need to become a great chorus. </p>
 				{/* <img src='https://images.app.goo.gl/uvsdw9p2QTTHQM9V6' alt="loading..." /> */}
 				<p>Sign up for a free account to enjoy all our free resources</p>

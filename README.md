@@ -1,8 +1,8 @@
 # HARMONY HAVEN README
 
 ## Deployed Link
-Deployed on Heroku (Client) 
-https://harmonyhavenclient.herokuapp.com/
+Deployed on Netlify (Client) 
+https://gleaming-genie-537e6b.netlify.app
 
 ## Link to backend api
 GitHub API Repo https://github.com/bostonbachexchange/project_4_API
